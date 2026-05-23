@@ -294,7 +294,7 @@ function Hero({ tweaks }) {
           <ul ref={statsRef} className="stats stats-centered">
             <AnimatedStat num="100%" label="מותאם לנייד" inView={statsInView} />
             <AnimatedStat num="5 ימים" label="ממוצע להשקה" inView={statsInView} />
-            <AnimatedStat num="∞" label="עדכונים לאחר השקה" inView={statsInView} />
+            <AnimatedStat num="24/7" label="תמיכה טכנית" inView={statsInView} />
           </ul>
         }
 
