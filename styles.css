@@ -550,8 +550,8 @@ button { font: inherit; cursor: pointer; }
   box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.8) inset;
   animation: floatUp 6s ease-in-out infinite alternate;
 }
-.hero-float-card-1 { top: 22%; left: 4%; animation-delay: 0s; }
-.hero-float-card-2 { bottom: 26%; right: 4%; animation-delay: 2.5s; }
+.hero-float-card-1 { bottom: 38%; left: 2%; animation-delay: 0s; }
+.hero-float-card-2 { bottom: 22%; right: 2%; animation-delay: 2.5s; }
 .hero-float-icon { font-size: 20px; line-height: 1; }
 .hero-float-dot {
   width: 10px; height: 10px; border-radius: 50%;
@@ -1117,6 +1117,7 @@ button { font: inherit; cursor: pointer; }
 /* ──────────── Responsive ──────────── */
 
 @media (max-width: 960px) {
+  .hero-float-card { display: none; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-copy, .hero-media { grid-column: auto; }
   .hero-media { order: -1; }
