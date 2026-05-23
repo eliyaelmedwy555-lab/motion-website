@@ -810,15 +810,34 @@ function Contact() {
   const [headRef, headInView] = useReveal();
   const [formRef, formInView] = useReveal(0.1);
   const [submitted, setSubmitted] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
   const [form, setForm] = React.useState({ name: "", phone: "", type: "", message: "" });
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -885,8 +904,15 @@ function Contact() {
                     value={form.message} onChange={handleChange}
                     placeholder="תארו בקצרה את העסק, מטרת האתר, ומה חשוב לכם..." />
                 </div>
-                <button type="submit" className="contact-submit">שלחו פנייה →</button>
+                <button type="submit" className="contact-submit" disabled={sending}>
+                  {sending ? "שולח..." : "שלחו פנייה →"}
+                </button>
                 <p className="contact-form-note">* שדות חובה · לא שולחים ספאם, לעולם לא.</p>
+                {submitError && (
+                  <p style={{ color: "#E24B4A", fontSize: 13, marginTop: 8 }}>
+                    משהו השתבש. נסו שוב או כתבו לנו ישירות.
+                  </p>
+                )}
               </form>
             )}
           </div>
