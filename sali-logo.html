@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SALI. Logo Studio — מותג שנזכרים בו</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ─── Tokens ─── */
+:root {
+  --bg:   #0d0d0d;
+  --bg2:  #141414;
+  --bg3:  #0a0a0a;
+  --accent: #e8445a;
+  --accent-dim: rgba(232,68,90,.15);
+  --accent-glow: rgba(232,68,90,.35);
+  --txt:  #ffffff;
+  --txt-muted: rgba(255,255,255,.45);
+  --border: rgba(255,255,255,.08);
+  --ease: cubic-bezier(.22,.68,0,1.2);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--txt);
+  font-family:'Heebo',sans-serif; direction:rtl;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ─── Scroll-reveal base ─── */
+.reveal {
+  opacity:0;
+  transform:translateY(28px);
+  transition: opacity .6s ease, transform .6s var(--ease);
+}
+.reveal.in { opacity:1; transform:none; }
+
+/* ─── NAV ─── */
+nav {
+  position:fixed; top:0; inset-inline:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(13,13,13,.7);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,68,90,.08);
+  transition:border-color .3s, background .3s;
+}
+nav.scrolled {
+  background:rgba(13,13,13,.92);
+  border-bottom-color:rgba(232,68,90,.25);
+}
+.nav-logo {
+  font-size:22px; font-weight:900; color:var(--accent);
+  letter-spacing:3px; text-decoration:none;
+  transition:opacity .2s;
+}
+.nav-logo:hover { opacity:.8; }
+.nav-links {
+  display:flex; gap:36px; list-style:none;
+}
+.nav-links a {
+  color:var(--txt-muted); text-decoration:none;
+  font-size:14px; font-weight:500;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--txt); }
+.nav-cta {
+  background:var(--accent); color:#fff;
+  padding:9px 22px; border-radius:7px;
+  font-size:13px; font-weight:700; text-decoration:none;
+  transition:transform .2s, box-shadow .2s;
+}
+.nav-cta:hover {
+  transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(232,68,90,.4);
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100svh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:140px 40px 100px;
+  position:relative; overflow:hidden;
+}
+.hero-glow {
+  position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% -5%, rgba(232,68,90,.18) 0%, transparent 65%);
+  transition:background .1s linear;
+}
+.hero::after {
+  content:'';
+  position:absolute; bottom:0; inset-inline:0; height:1px;
+  background:linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+}
+.hero-eyebrow {
+  font-size:11px; letter-spacing:8px; color:rgba(232,68,90,.75);
+  text-transform:uppercase; margin-bottom:28px;
+  opacity:0; transform:translateY(16px);
+  transition:opacity .6s ease, transform .6s var(--ease);
+}
+.hero-title {
+  font-size:clamp(52px, 9vw, 104px); font-weight:900;
+  line-height:1.0; margin-bottom:0;
+  opacity:0; transform:translateY(20px);
+  transition:opacity .7s ease .15s, transform .7s var(--ease) .15s;
+}
+.hero-title .accent { color:var(--accent); }
+.hero-divider {
+  width:52px; height:3px; background:var(--accent);
+  margin:28px auto;
+  transform:scaleX(0); transform-origin:center;
+  opacity:0;
+  transition:transform .5s var(--ease) .3s, opacity .5s ease .3s;
+}
+.hero-sub {
+  font-size:17px; color:var(--txt-muted); max-width:440px;
+  line-height:1.75; margin-bottom:52px;
+  opacity:0;
+  transition:opacity .7s ease .45s;
+}
+.hero-btns {
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+  opacity:0; transform:translateY(12px);
+  transition:opacity .6s ease .6s, transform .6s var(--ease) .6s;
+}
+.btn-primary {
+  background:var(--accent); color:#fff;
+  padding:14px 34px; border-radius:9px;
+  font-size:15px; font-weight:700; text-decoration:none;
+  transition:transform .2s, box-shadow .2s;
+}
+.btn-primary:hover {
+  transform:scale(1.04);
+  box-shadow:0 8px 28px rgba(232,68,90,.45);
+}
+.btn-ghost {
+  border:1px solid rgba(255,255,255,.2); color:var(--txt);
+  padding:14px 34px; border-radius:9px;
+  font-size:15px; font-weight:600; text-decoration:none;
+  transition:border-color .2s, background .2s;
+}
+.btn-ghost:hover {
+  border-color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.05);
+}
+.hero-scroll {
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  font-size:10px; color:rgba(255,255,255,.25); letter-spacing:4px;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  opacity:0; transition:opacity .8s ease .9s;
+}
+.hero-scroll-line {
+  width:1px; height:32px;
+  background:linear-gradient(to bottom, var(--accent), transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { transform:scaleY(1); opacity:1; }
+  50%      { transform:scaleY(.6); opacity:.4; }
+}
+
+/* hero loaded state */
+body.loaded .hero-eyebrow,
+body.loaded .hero-title,
+body.loaded .hero-sub,
+body.loaded .hero-btns,
+body.loaded .hero-scroll { opacity:1; transform:none; }
+body.loaded .hero-divider { transform:scaleX(1); opacity:1; }
+
+/* ─── SECTION SHARED ─── */
+.section { padding:110px 48px; max-width:1120px; margin:0 auto; }
+.section-label {
+  font-size:11px; letter-spacing:6px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:14px;
+}
+.section-title {
+  font-size:clamp(34px,5vw,54px); font-weight:900;
+  line-height:1.08; margin-bottom:14px;
+}
+.section-sub {
+  font-size:16px; color:var(--txt-muted);
+  max-width:440px; line-height:1.75;
+}
+
+/* ─── SERVICES ─── */
+#services { border-bottom:1px solid var(--border); }
+.services-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:18px; margin-top:60px;
+}
+.service-card {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:18px; padding:34px 28px;
+  transition:transform .3s var(--ease), border-color .3s, box-shadow .3s;
+  cursor:default;
+}
+.service-card:hover {
+  transform:translateY(-5px);
+  border-color:var(--accent-glow);
+  box-shadow:0 16px 40px rgba(232,68,90,.12);
+}
+.service-card.featured {
+  border-color:rgba(232,68,90,.3);
+  background:#18060c;
+}
+.service-icon {
+  width:46px; height:46px;
+  background:var(--accent-dim); border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:22px;
+}
+.service-icon svg { width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.service-name { font-size:19px; font-weight:800; margin-bottom:10px; }
+.service-desc { font-size:14px; color:var(--txt-muted); line-height:1.7; }
+.service-badge {
+  display:inline-block; margin-bottom:10px;
+  font-size:10px; color:var(--accent); letter-spacing:2px;
+  text-transform:uppercase; font-weight:700;
+}
+.service-price { font-size:13px; color:var(--accent); font-weight:700; margin-top:22px; }
+
+/* ─── PORTFOLIO ─── */
+#portfolio { background:var(--bg3); padding:110px 0; }
+#portfolio .inner { max-width:1120px; margin:0 auto; padding:0 48px; }
+.portfolio-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-top:60px;
+}
+.logo-card {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px; aspect-ratio:4/3;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:14px; padding:28px; position:relative; overflow:hidden;
+  transition:transform .35s var(--ease), border-color .3s, box-shadow .3s;
+  cursor:pointer;
+}
+.logo-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 120%, var(--accent-dim) 0%, transparent 70%);
+  opacity:0; transition:opacity .35s;
+}
+.logo-card:hover { transform:translateY(-6px) scale(1.02); border-color:var(--accent-glow); box-shadow:0 20px 50px rgba(232,68,90,.14); }
+.logo-card:hover::before { opacity:1; }
+.logo-tag {
+  position:absolute; top:13px; right:14px;
+  font-size:9px; color:rgba(255,255,255,.25); letter-spacing:2px;
+  font-weight:600; text-transform:uppercase;
+}
+.logo-client { font-size:11px; color:rgba(255,255,255,.3); text-align:center; line-height:1.4; }
+
+/* ─── PROCESS ─── */
+#process { border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.process-steps {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:40px; margin-top:72px; position:relative;
+}
+.process-connector {
+  position:absolute; top:26px; right:calc(16.66% + 28px); left:calc(16.66% + 28px);
+  height:1px;
+  background:linear-gradient(to left, rgba(232,68,90,.15), var(--accent), rgba(232,68,90,.15));
+}
+.step { text-align:center; }
+.step-num {
+  width:52px; height:52px; border-radius:50%;
+  background:var(--accent); color:#fff;
+  font-size:17px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 22px; position:relative; z-index:1;
+  box-shadow:0 0 0 6px rgba(232,68,90,.15);
+  transition:box-shadow .3s;
+}
+.step:hover .step-num { box-shadow:0 0 0 10px rgba(232,68,90,.2); }
+.step-name { font-size:18px; font-weight:800; margin-bottom:10px; }
+.step-desc { font-size:14px; color:var(--txt-muted); line-height:1.65; }
+
+/* ─── CTA ─── */
+#contact {
+  text-align:center; padding:130px 48px;
+  position:relative; overflow:hidden;
+  border-top:1px solid rgba(232,68,90,.12);
+}
+#contact::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%, rgba(232,68,90,.09) 0%, transparent 70%);
+  pointer-events:none;
+}
+#contact .section-title { margin-bottom:18px; }
+#contact .section-sub { margin:0 auto 52px; }
+.cta-email { font-size:13px; color:rgba(255,255,255,.3); margin-top:18px; }
+.cta-email a { color:rgba(232,68,90,.7); text-decoration:none; transition:color .2s; }
+.cta-email a:hover { color:var(--accent); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top:1px solid var(--border);
+  padding:28px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; color:rgba(255,255,255,.2);
+}
+.footer-logo { font-size:14px; font-weight:900; color:rgba(232,68,90,.4); letter-spacing:2px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:768px) {
+  nav { padding:14px 20px; }
+  .nav-links { display:none; }
+  .section { padding:80px 20px; }
+  #portfolio .inner { padding:0 20px; }
+  .services-grid { grid-template-columns:1fr; }
+  .portfolio-grid { grid-template-columns:repeat(2,1fr); }
+  .process-steps { grid-template-columns:1fr; gap:48px; }
+  .process-connector { display:none; }
+  #contact { padding:100px 20px; }
+  footer { flex-direction:column; gap:8px; text-align:center; }
+}
+@media (max-width:480px) {
+  .portfolio-grid { grid-template-columns:1fr; }
+  .hero-btns { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">SALI.</a>
+  <ul class="nav-links">
+    <li><a href="#services">שירותים</a></li>
+    <li><a href="#portfolio">עבודות</a></li>
+    <li><a href="#process">תהליך</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">בואי נדבר</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-glow" id="heroGlow"></div>
+  <div class="hero-eyebrow">logo studio &middot; עיצוב &middot; מיתוג &middot; זהות</div>
+  <h1 class="hero-title">מותג שנזכרים<br/>בו<span class="accent">.</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">לוגואים שמדברים בשפת העסק שלך. בלי פשרות, בלי תבניות — רק עיצוב שבנוי עליך.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">בואי נדבר</a>
+    <a href="#portfolio" class="btn-ghost">ראה עבודות</a>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div id="services" style="background:var(--bg);">
+  <div class="section">
+    <div class="section-label reveal">מה אני עושה</div>
+    <h2 class="section-title reveal">שירותי עיצוב</h2>
+    <p class="section-sub reveal">כל פאקג׳ בנוי כדי לתת לעסק שלך מיתוג שמחזיק לאורך זמן.</p>
+    <div class="services-grid">
+
+      <div class="service-card reveal" style="--d:0ms">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="service-name">לוגו בסיסי</div>
+        <div class="service-desc">לוגו אחד מעוצב עם שתי וריאציות צבע, קבצי וקטור מלאים ו-PNG בכל רזולוציה.</div>
+        <div class="service-price">החל מ-490 ₪</div>
+      </div>
+
+      <div class="service-card featured reveal" style="--d:100ms">
+        <div class="service-icon" style="background:rgba(232,68,90,.25);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div class="service-badge">הכי פופולרי</div>
+        <div class="service-name">מיתוג מלא</div>
+        <div class="service-desc">לוגו + פלטת צבעים + טיפוגרפיה + כרטיס ביקור + מדריך שימוש מלא.</div>
+        <div class="service-price">החל מ-1,290 ₪</div>
+      </div>
+
+      <div class="service-card reveal" style="--d:200ms">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </div>
+        <div class="service-name">ריברנד</div>
+        <div class="service-desc">מיתוג מחדש לעסק קיים — שימור הזהות עם רענון עדכני ומקצועי.</div>
+        <div class="service-price">החל מ-1,890 ₪</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio">
+  <div class="inner">
+    <div class="section-label reveal">עבודות נבחרות</div>
+    <h2 class="section-title reveal">תיק עבודות</h2>
+    <p class="section-sub reveal">80+ לוגואים ומיתוגים למגוון עסקים ותעשיות.</p>
+
+    <div class="portfolio-grid">
+
+
+      <!-- 2 Icon + Name -->
+      <div class="logo-card reveal" style="--d:80ms">
+        <span class="logo-tag">ICON + NAME</span>
+        <svg width="120" height="52" viewBox="0 0 120 52" fill="none">
+          <polygon points="22,4 38,4 30,22 44,22 14,48 22,26 8,26" fill="#e8445a"/>
+          <text x="52" y="34" font-family="Arial,sans-serif" font-size="18" font-weight="900" fill="#fff">SPARK</text>
+        </svg>
+        <div class="logo-client">Spark Studio<br/>סטודיו קריאייטיב</div>
+      </div>
+
+      <!-- 3 Monogram -->
+      <div class="logo-card reveal" style="--d:160ms">
+        <span class="logo-tag">MONOGRAM</span>
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="29" stroke="#e8445a" stroke-width="1.5"/>
+          <text x="32" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#fff">KJ</text>
+        </svg>
+        <div class="logo-client">KJ Law<br/>משרד עורכי דין</div>
+      </div>
+
+      <!-- 4 Geometric -->
+      <div class="logo-card reveal" style="--d:240ms">
+        <span class="logo-tag">GEOMETRIC</span>
+        <svg width="80" height="64" viewBox="0 0 80 64" fill="none">
+          <polygon points="40,4 76,60 4,60" stroke="#fff" stroke-width="1.8"/>
+          <polygon points="40,18 64,56 16,56" fill="#e8445a" opacity=".65"/>
+          <polygon points="40,32 52,52 28,52" fill="#fff"/>
+        </svg>
+        <div class="logo-client">Apex Ventures<br/>קרן השקעות</div>
+      </div>
+
+      <!-- 5 Badge -->
+      <div class="logo-card reveal" style="--d:320ms">
+        <span class="logo-tag">BADGE</span>
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <path d="M36 4l14 10 17-2v17l11 7-11 7v17l-17-2-14 10-14-10-17 2V26L0 19l11-7V5l17 2z" stroke="#e8445a" stroke-width="1.4"/>
+          <text x="36" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#e8445a" letter-spacing="2">ROYAL</text>
+          <text x="36" y="48" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="900" fill="#fff">BREW</text>
+        </svg>
+        <div class="logo-client">Royal Brew<br/>בית קפה</div>
+      </div>
+
+      <!-- 6 Letterform -->
+      <div class="logo-card reveal" style="--d:400ms">
+        <span class="logo-tag">LETTERFORM</span>
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <rect x="5" y="5" width="62" height="62" rx="14" stroke="#e8445a" stroke-width="1.5" fill="rgba(232,68,90,.08)"/>
+          <text x="36" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="44" font-weight="700" fill="#e8445a" font-style="italic">N</text>
+        </svg>
+        <div class="logo-client">Nova<br/>אפליקציית אופנה</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div id="process">
+  <div class="section">
+    <div class="section-label reveal">איך עובדים</div>
+    <h2 class="section-title reveal">תהליך העבודה</h2>
+    <p class="section-sub reveal">שלושה שלבים פשוטים — מהשיחה הראשונה עד הלוגו המוגמר.</p>
+    <div class="process-steps" style="margin-top:72px;">
+      <div class="process-connector"></div>
+      <div class="step reveal" style="--d:0ms">
+        <div class="step-num">01</div>
+        <div class="step-name">שיחת היכרות</div>
+        <div class="step-desc">מדברים על העסק, הקהל, המתחרים, והחזון. זה הבסיס לכל.</div>
+      </div>
+      <div class="step reveal" style="--d:200ms">
+        <div class="step-num">02</div>
+        <div class="step-name">עיצוב ווריאציות</div>
+        <div class="step-desc">מציגה 3 כיוונים עיצוביים. בוחרים יחד, מחדדים עד שמרגיש נכון.</div>
+      </div>
+      <div class="step reveal" style="--d:400ms">
+        <div class="step-num">03</div>
+        <div class="step-name">מסירה ותמיכה</div>
+        <div class="step-desc">קבצים בכל פורמט שתצטרך + 30 יום תמיכה בשימוש.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="contact">
+  <div class="section-label reveal">מוכן להתחיל?</div>
+  <h2 class="section-title reveal">בוא נבנה<br/>מותג שמדבר<span style="color:var(--accent)">.</span></h2>
+  <p class="section-sub reveal" style="margin:0 auto 52px;">תיאום ראשוני בחינם. ספר לי קצת על העסק שלך ואחזור אליך תוך 24 שעות.</p>
+  <a href="mailto:sali@sali-logo.co.il" class="btn-primary reveal" style="display:inline-block;font-size:16px;padding:16px 42px;">בואי נדבר &larr;</a>
+  <div class="cta-email reveal" style="margin-top:20px;">
+    או שלח מייל ישירות ל<a href="mailto:sali@sali-logo.co.il">sali@sali-logo.co.il</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SALI.</div>
+  <div>© 2024 Sali Logo Studio · כל הזכויות שמורות</div>
+</footer>
+
+<script>
+// ── Hero entrance ──────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => document.body.classList.add('loaded'));
+});
+
+// ── Nav scroll effect ──────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Hero parallax glow on mousemove ────────────────────────
+const heroGlow = document.getElementById('heroGlow');
+document.querySelector('.hero').addEventListener('mousemove', e => {
+  const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+  const x = ((e.clientX - left) / width  * 100).toFixed(1);
+  const y = ((e.clientY - top)  / height * 60  - 5).toFixed(1);
+  heroGlow.style.background =
+    `radial-gradient(ellipse 70% 55% at ${x}% ${y}%, rgba(232,68,90,.2) 0%, transparent 65%)`;
+}, { passive: true });
+document.querySelector('.hero').addEventListener('mouseleave', () => {
+  heroGlow.style.background =
+    'radial-gradient(ellipse 70% 55% at 50% -5%, rgba(232,68,90,.18) 0%, transparent 65%)';
+});
+
+// ── Scroll reveals ─────────────────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (!el.isIntersecting) return;
+    const delay = el.target.style.getPropertyValue('--d') || '0ms';
+    setTimeout(() => el.target.classList.add('in'), parseInt(delay) || 0);
+    io.unobserve(el.target);
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

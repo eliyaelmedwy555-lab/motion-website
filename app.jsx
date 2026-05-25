@@ -1,4 +1,4 @@
-/* Motion landing page — v2 with comprehensive Tweaks */
+/* Motion landing page v2 with comprehensive Tweaks */
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#4F46E5",
@@ -69,6 +69,37 @@ function CheckIcon() {
       <path d="M2.5 7.5L6 11L12.5 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
+}
+
+function IconZap() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+}
+function IconTarget() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>;
+}
+function IconFileText() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>;
+}
+function IconShield() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+}
+function IconServer() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>;
+}
+function IconGlobe() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>;
+}
+function IconLock() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>;
+}
+function IconWrench() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>;
+}
+function IconMessageSquare() {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
+}
+function IconTrendingUp() {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>;
 }
 
 /* ───────────────────────── Animation hooks ───────────────────────── */
@@ -175,7 +206,7 @@ function Nav() {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const sections = ["services", "work", "pricing", "contact"];
+    const sections = ["services", "work", "faq", "pricing", "contact"];
     function onScroll() {
       const scrollY = window.scrollY + 80;
       let current = "";
@@ -199,6 +230,7 @@ function Nav() {
         <nav className={`nav-links${menuOpen ? " open" : ""}`}>
           <a href="#services" className={active === "services" ? "nav-active" : ""} onClick={closeMenu}>שירותים</a>
           <a href="#work" className={active === "work" ? "nav-active" : ""} onClick={closeMenu}>עבודות</a>
+          <a href="#faq" className={active === "faq" ? "nav-active" : ""} onClick={closeMenu}>שאלות נפוצות</a>
           <a href="#pricing" className={active === "pricing" ? "nav-active" : ""} onClick={closeMenu}>מחירים</a>
           <a href="#contact" className={active === "contact" ? "nav-active" : ""} onClick={closeMenu}>צור קשר</a>
         </nav>
@@ -308,7 +340,7 @@ function Hero({ tweaks }) {
 
       <div className="hero-float-card hero-float-card-1" aria-hidden="true"
         style={{ transform: `translateY(calc(${-parallaxY * 0.14}px))` }}>
-        <span className="hero-float-icon">📈</span>
+        <span className="hero-float-icon"><IconTrendingUp /></span>
         <div>
           <div className="hero-float-label">ממוצע המרות</div>
           <div className="hero-float-val">+200%</div>
@@ -330,7 +362,7 @@ function Hero({ tweaks }) {
 
 const SERVICES = [
   { n: "01", name: "אתר תדמית", desc: "עמוד הבית של העסק שלכם. בהיר, מקצועי, ומסביר במשפט אחד מה אתם עושים. 5 עמודים בליבה, מותאם לנייד מהיום הראשון.", tag: "₪2,500" },
-  { n: "02", name: "דף נחיתה",  desc: "דף ממוקד אחד שמייצר לידים לקמפיין בלי הסחות, רק מסר ופעולה. כולל חיבור לפיקסל ו CRM.", tag: "₪1,500" },
+  { n: "02", name: "דף נחיתה",  desc: "דף ממוקד אחד שמייצר לידים לקמפיין בלי הסחות, רק מסר ופעולה. כולל 3 עמודים, חיבור לפיקסל ו CRM.", tag: "₪1,500" },
 ];
 
 function Services({ tweaks }) {
@@ -442,9 +474,8 @@ function Process({ tweaks }) {
 /* ───────────────────────── Work ───────────────────────── */
 
 const WORK = [
-  { n: "01", client: "זיו חשמל+",      kind: "חנות אונליין",  line: "ציוד חשמלי לבית ולמקצוע. 3,000+ מוצרים במלאי, משלוח תוך 24 שעות וייעוץ טכני חינם.",         metric: "3,000+ מוצרים במלאי", palette: ["#0f172a", "#1e3a5f", "#3b82f6"], url: "https://smoke-spkh.vercel.app" },
-  { n: "02", client: "ירון נדל\"ן",     kind: "דף נחיתה",      line: "סוכן נדל\"ן מוביל בתל אביב. דף ממוקד שמייצר פגישות ישירות עם לקוחות פוטנציאליים דרך טופס חכם.", metric: "+180% פגישות",         palette: ["#1a1209", "#2d1f0a", "#c9a84c"], url: "#" },
-  { n: "03", client: "גלי עיצוב שיער", kind: "אתר תדמית",     line: "מספרה בוטיק בהרצליה. אתר 5 עמודים שמציג את הסגנון, השירותים וקביעת תור אונליין.",              metric: "5 עמודים מושלמים",     palette: ["#1a0a12", "#3d1a2e", "#e879a0"], url: "#" },
+  { n: "01", client: "זיו חשמל+",      kind: "אתר תדמית",  line: "ציוד חשמלי לבית ולמקצוע. 3,000+ מוצרים במלאי, משלוח תוך 24 שעות וייעוץ טכני חינם.",         metric: "3,000+ מוצרים במלאי", palette: ["#0f172a", "#1e3a5f", "#3b82f6"], url: "https://smoke-spkh.vercel.app", domain: "ziv-electrical.co.il" },
+  { n: "02", client: "סלי לוגו",       kind: "דף נחיתה",      line: "סטודיו לעיצוב לוגואים ומיתוג. עיצוב מודרני ונועז לעסקים שרוצים להיזכר.",                        metric: "80+ מותגים",           palette: ["#0d0d0d", "#1a0a0e", "#e8445a"], url: "sali-logo.html",             domain: "sali-logo.co.il" },
 ];
 
 function AnimatedMetric({ raw, inView }) {
@@ -539,7 +570,7 @@ function WorkCard({ project, index, total, sticky }) {
             <span className="m-tile-dot" />
             <span className="m-tile-dot" />
             <span className="m-tile-dot" />
-            <span className="work-card-url">{project.client.replace(/\s+/g, "").toLowerCase()}.co.il</span>
+            <span className="work-card-url">{project.domain}</span>
           </div>
           {project.url && project.url !== '#' ? (
             <div className="work-card-iframe-wrap">
@@ -586,6 +617,7 @@ function Work({ tweaks }) {
             <h2 className={`section-title section-title-xl ${isDark ? "section-title-light" : ""}`}>תיק עבודות</h2>
           </div>
           <p className={`section-sub ${isDark ? "section-sub-light" : ""}`} style={{ maxWidth: 380 }}>
+            כל פרויקט, תוצאה אמיתית. לא תבנית, לא קיצורי דרך.
           </p>
         </div>
 
@@ -593,6 +625,159 @@ function Work({ tweaks }) {
           {WORK.map((p, i) =>
             <WorkCard key={p.n} project={p} index={i} total={WORK.length} sticky={tweaks.stickyStack} />
           )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── Testimonials ───────────────────────── */
+
+const TESTIMONIALS = [
+  { name: "רן כהן", role: "בעל עסק, שיפוצניק", text: "קיבלתי אתר מקצועי תוך 6 ימים. הלקוחות מתקשרים דרך האתר כבר מהשבוע הראשון. שווה כל שקל.", result: "+3 לקוחות בשבוע הראשון" },
+  { name: "מיכל לוי", role: "קוסמטיקאית עצמאית", text: "פחדתי שיהיה מסובך. הם ניהלו הכל, אני רק אישרתי. התוצאה יפה מכל מה שדמיינתי — ולקוחות מגיעות מגוגל.", result: "לקוחות חדשות מחיפוש" },
+  { name: "אבי שמש", role: "עורך דין", text: "אתר תדמית שנראה כמו של משרד גדול. לקוחות חדשים מגיעים דרך גוגל — זה לא קרה לי לפני שבניתי את האתר.", result: "נראות מקצועית מידית" },
+];
+
+function Testimonials() {
+  const [headRef, headInView] = useReveal();
+  const listRef = React.useRef(null);
+  useRevealList(listRef, '.testi-card', 110);
+  return (
+    <section className="section section-testimonials">
+      <div className="container">
+        <div ref={headRef} className={`section-head section-head-row reveal${headInView ? ' in-view' : ''}`}>
+          <div>
+            <span className="eyebrow">
+              <span className="eyebrow-dot" />
+              לקוחות
+            </span>
+            <h2 className="section-title section-title-xl">מה אומרים<br />עלינו.</h2>
+          </div>
+          <p className="section-sub" style={{ maxWidth: 380 }}>
+            לא הבטחות — אנשים שעברו את התהליך ומספרים.
+          </p>
+        </div>
+        <div ref={listRef} className="testimonials-grid">
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className="testi-card">
+              <p className="testi-quote">{t.text}</p>
+              <div className="testi-foot">
+                <div className="testi-author">
+                  <span className="testi-name">{t.name}</span>
+                  <span className="testi-role">{t.role}</span>
+                </div>
+                <span className="testi-result">{t.result}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── FAQ ───────────────────────── */
+
+const FAQS = [
+  {
+    q: "כמה זמן זה באמת לוקח?",
+    a: "ממוצע 5–7 ימי עבודה מהבריף ועד שהאתר באוויר. אם הפרויקט מורכב יותר, אומרים מראש ומסכימים על לוח זמנים. אין הפתעות באמצע.",
+  },
+  {
+    q: "מה קורה אם אני לא מרוצה מהתוצאה?",
+    a: "כל חבילה כוללת 3 סבבי תיקונים. אם משהו לא מדויק, אומרים ומתקנים. לא נשאיר אתכם עם תוצאה שאתם לא אוהבים.",
+  },
+  {
+    q: "למה לא פשוט לבנות אתר לבדי?",
+    a: "אפשר. אבל אנחנו בונים אתרי פרמיום עם אנימציות תנועה מתקדמות, חוויית משתמש מחושבת, ועיצוב שמרגיש יוקרתי ולא גנרי. זה לא רק אתר שנראה טוב בתמונה, זה אתר שאנשים זוכרים. רמה כזו לוקחת שנות ניסיון, וזמן שלרוב בעלי עסקים פשוט אין.",
+  },
+  {
+    q: "האם האתר כולל SEO?",
+    a: "כן. כל אתר מגיע עם SEO בסיסי: meta tags, sitemap, חיבור ל-Google Search Console ומהירות טעינה מותאמת. SEO מתקדם זמין בהתאמה אישית.",
+  },
+  {
+    q: "מה כולל התחזוקה החודשית?",
+    a: "אחסון, דומיין, SSL, תיקוני באגים קטנים ותמיכה טכנית. האתר תמיד יעבוד, גם אם משהו ישתבש בצד השרת.",
+  },
+];
+
+function FaqItem({ item, index }) {
+  const [open, setOpen] = React.useState(false);
+  const [ref, inView] = useReveal(0.05);
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.45s ease ${index * 70}ms, transform 0.45s ease ${index * 70}ms`,
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
+      }}
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        style={{
+          width: "100%", display: "flex", alignItems: "center",
+          justifyContent: "space-between", gap: 16,
+          padding: "20px 0", background: "none", border: "none",
+          cursor: "pointer", textAlign: "right",
+        }}
+      >
+        <span style={{ fontSize: 16.5, fontWeight: 600, color: "#0F0F12", lineHeight: 1.4, flex: 1 }}>
+          {item.q}
+        </span>
+        <span style={{
+          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
+          background: open ? "var(--accent,#4F46E5)" : "rgba(0,0,0,0.06)",
+          color: open ? "#fff" : "#0F0F12",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 18, lineHeight: 1,
+          transition: "background 0.2s, color 0.2s, transform 0.25s",
+          transform: open ? "rotate(45deg)" : "rotate(0deg)",
+        }}>
+          +
+        </span>
+      </button>
+      <div style={{
+        maxHeight: open ? "320px" : "0",
+        overflow: "hidden",
+        transition: "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}>
+        <p style={{
+          fontSize: 15, lineHeight: 1.8, color: "#4B5563",
+          paddingBottom: 20, margin: 0, paddingRight: 2,
+        }}>
+          {item.a}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function FAQ() {
+  const [headRef, headInView] = useReveal();
+  return (
+    <section id="faq" className="section" data-screen-label="07 FAQ" style={{ background: "#F6F6F8" }}>
+      <div className="container">
+        <div ref={headRef} className={`section-head reveal${headInView ? " in-view" : ""}`}
+          style={{ textAlign: "center", marginBottom: 56 }}>
+          <span className="eyebrow" style={{ display: "inline-flex", margin: "0 auto 16px" }}>
+            <span className="eyebrow-dot" />
+            שאלות נפוצות
+          </span>
+          <h2 className="section-title section-title-xl" style={{ textAlign: "center" }}>
+            יש שאלות?
+          </h2>
+          <p className="section-sub" style={{ textAlign: "center", maxWidth: 440, margin: "12px auto 0" }}>
+            כל מה שרצית לשאול לפני שמתחילים.
+          </p>
+        </div>
+        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+          {FAQS.map((item, i) => (
+            <FaqItem key={i} item={item} index={i} />
+          ))}
         </div>
       </div>
     </section>
@@ -704,11 +889,11 @@ function PricingProcess() {
 }
 
 const MONTHLY_INCLUDES = [
-  { icon: "🖥️", label: "אחסון מאובטח" },
-  { icon: "🌐", label: "דומיין שנה ראשונה" },
-  { icon: "🔒", label: "SSL מוגן" },
-  { icon: "🔧", label: "תיקוני באגים קטנים" },
-  { icon: "💬", label: "תמיכה טכנית" },
+  { icon: <IconServer />, label: "אחסון מאובטח" },
+  { icon: <IconGlobe />, label: "דומיין שנה ראשונה" },
+  { icon: <IconLock />, label: "SSL מוגן" },
+  { icon: <IconWrench />, label: "תיקוני באגים קטנים" },
+  { icon: <IconMessageSquare />, label: "תמיכה טכנית" },
 ];
 
 function PricingMonthly() {
@@ -765,11 +950,11 @@ function Pricing() {
           ))}
         </div>
 
-        {/* [C] Process */}
-        <PricingProcess />
-
-        {/* [D] Monthly includes */}
+        {/* [C] Monthly includes */}
         <PricingMonthly />
+
+        {/* [D] Process */}
+        <PricingProcess />
 
         {/* [F] Disclaimer */}
         <p className="pricing-disclaimer">
@@ -800,10 +985,10 @@ function MailIcon() {
 /* ───────────────────────── Contact ───────────────────────── */
 
 const CONTACT_PROMISES = [
-  { icon: "⚡", text: "חזרה תוך 24 שעות בימי עסקים" },
-  { icon: "🎯", text: "שיחת ייעוץ ראשונה, בחינם לחלוטין" },
-  { icon: "📋", text: "הצעת מחיר מפורטת ללא התחייבות" },
-  { icon: "🔒", text: "פרטיות מלאה, המידע שלכם אצלנו בלבד" },
+  { icon: <IconZap />, text: "חזרה תוך 24 שעות בימי עסקים" },
+  { icon: <IconTarget />, text: "שיחת ייעוץ ראשונה, בחינם לחלוטין" },
+  { icon: <IconFileText />, text: "הצעת מחיר מפורטת ללא התחייבות" },
+  { icon: <IconShield />, text: "פרטיות מלאה, המידע שלכם אצלנו בלבד" },
 ];
 
 function Contact() {
@@ -1107,6 +1292,7 @@ function App() {
         <Services tweaks={t} />
         <Process tweaks={t} />
         <Work tweaks={t} />
+        <FAQ />
         <Pricing />
         <Contact />
       </main>

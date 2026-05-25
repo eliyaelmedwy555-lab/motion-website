@@ -1,0 +1,8 @@
+node_modules/
+.superpowers/
+.agents/
+docs/
+about me/
+CLAUDE (2).md
+skills-lock.json
+*.png
