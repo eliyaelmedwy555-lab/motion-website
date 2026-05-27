@@ -23,7 +23,14 @@ const mime = {
 
 http.createServer((req, res) => {
   const urlPath = req.url.split('?')[0];
-  let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
+
+  // SPA rewrite: /jack and /jack/* → jack/index.html (mirrors vercel.json rewrites)
+  let resolvedPath = urlPath;
+  if ((resolvedPath === '/jack' || resolvedPath.startsWith('/jack/')) && !path.extname(resolvedPath)) {
+    resolvedPath = '/jack/index.html';
+  }
+
+  let filePath = path.join(__dirname, resolvedPath === '/' ? 'index.html' : resolvedPath);
   const ext = path.extname(filePath);
   const contentType = mime[ext] || 'application/octet-stream';
 

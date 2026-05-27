@@ -476,7 +476,7 @@ function Process({ tweaks }) {
 const WORK = [
   { n: "01", client: "זיו חשמל+",      kind: "אתר תדמית",  line: "ציוד חשמלי לבית ולמקצוע. 3,000+ מוצרים במלאי, משלוח תוך 24 שעות וייעוץ טכני חינם.",         metric: "3,000+ מוצרים במלאי", palette: ["#0f172a", "#1e3a5f", "#3b82f6"], url: "https://smoke-spkh.vercel.app", domain: "ziv-electrical.co.il" },
   { n: "02", client: "סלי לוגו",       kind: "דף נחיתה",      line: "סטודיו לעיצוב לוגואים ומיתוג. עיצוב מודרני ונועז לעסקים שרוצים להיזכר.",                        metric: "80+ מותגים",           palette: ["#0d0d0d", "#1a0a0e", "#e8445a"], url: "sali-logo.html",                                                domain: "sali-logo.co.il" },
-  { n: "03", client: "Jack — 3D",       kind: "פורטפוליו",      line: "יוצר תלת-ממד ומעצב תנועה. אנימציות, גרפיקה בתנועה ואמנות דיגיטלית שדוחפת את גבולות היצירתיות.", metric: "60+ פרויקטים",          palette: ["#0c0c0c", "#111a00", "#bfff00"],  url: "https://motion-website-steel.vercel.app/jack/", domain: "jack-3d.co.il" },
+  { n: "03", client: "Jack — 3D",       kind: "פורטפוליו",      line: "יוצר תלת-ממד ומעצב תנועה. אנימציות, גרפיקה בתנועה ואמנות דיגיטלית שדוחפת את גבולות היצירתיות.", metric: "60+ פרויקטים",          palette: ["#0c0c0c", "#111a00", "#bfff00"],  url: "/jack/", domain: "jack-3d.co.il" },
 ];
 
 function AnimatedMetric({ raw, inView }) {

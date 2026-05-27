@@ -6,7 +6,7 @@
   /* Tweakable tokens (overwritten at runtime from React) */
   --accent: #4F46E5;
   --accent-light: #818CF8;
-  --accent-pale: color-mix(in oklab, var(--accent) 12%, white);
+  --accent-pale: color-mix(in oklab, var(--accent) 18%, transparent);
   --bg: #FFFFFF;
   --display-font: "Inter";
   --display-weight: 800;
@@ -18,12 +18,12 @@
   --density: 1;
 
   /* Static */
-  --ink: #0F0F12;
-  --ink-2: #1c1c22;
-  --cloud: #F6F6F8;
-  --gray-mid: #6B7280;
-  --gray-soft: #9CA3AF;
-  --gray-border: #E8E8EC;
+  --ink: #f0f0f5;
+  --ink-2: #1e2028;
+  --cloud: #111116;
+  --gray-mid: #9CA3AF;
+  --gray-soft: #6B7280;
+  --gray-border: rgba(255,255,255,0.08);
   --white: #ffffff;
 
   --font-body: "Inter", "Heebo", -apple-system, system-ui, sans-serif;
@@ -133,8 +133,8 @@ button { font: inherit; cursor: pointer; }
 .btn-ghost { color: var(--ink); border-color: var(--gray-border); background: var(--bg); }
 .btn-ghost:hover { border-color: var(--ink); }
 
-.btn-ghost-dark { color: var(--ink); border-color: var(--ink); background: transparent; }
-.btn-ghost-dark:hover { background: #0F0F12; color: white; }
+.btn-ghost-dark { color: var(--ink); border-color: rgba(255,255,255,0.2); background: transparent; }
+.btn-ghost-dark:hover { background: rgba(255,255,255,0.07); color: var(--ink); }
 
 .btn-cta-primary { background: white; color: #0F0F12; }
 .btn-cta-primary:hover { background: #f2f2f4; }
@@ -168,10 +168,10 @@ button { font: inherit; cursor: pointer; }
 }
 .nav-links { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
 .nav-links a {
-  color: rgba(15,15,18,.7);
+  color: rgba(255,255,255,.65);
   transition: color .15s ease;
 }
-.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover { color: rgba(255,255,255,1); }
 
 /* ──────────── Hero New (centered) ──────────── */
 
@@ -181,7 +181,7 @@ button { font: inherit; cursor: pointer; }
   padding: 120px 24px 100px;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(to bottom, #fff 0%, #fff 50%, #ebebeb 88%);
+  background: #07071a;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
   display: flex;
@@ -196,8 +196,8 @@ button { font: inherit; cursor: pointer; }
   height: 600px;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, #e8e8e8 1px, transparent 1px),
-    linear-gradient(to bottom, #e8e8e8 1px, transparent 1px);
+    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: 5rem 4rem;
   mask-image: radial-gradient(ellipse 85% 55% at 50% 0%, #000 65%, transparent 110%);
   -webkit-mask-image: radial-gradient(ellipse 85% 55% at 50% 0%, #000 65%, transparent 110%);
@@ -210,7 +210,7 @@ button { font: inherit; cursor: pointer; }
   height: 500px;
   transform: translateX(-50%);
   border-radius: 100%;
-  background: radial-gradient(closest-side, #fff 82%, transparent);
+  background: radial-gradient(closest-side, #07071a 70%, transparent);
   z-index: 2;
   pointer-events: none;
 }
@@ -228,30 +228,30 @@ button { font: inherit; cursor: pointer; }
   display: inline-flex;
   align-items: center;
   font-size: 12px;
-  color: #555;
+  color: rgba(255,255,255,.55);
   padding: 8px 20px;
-  background: linear-gradient(to top right, rgba(212,212,216,0.08), rgba(156,163,175,0.05), transparent);
-  border: 1.5px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,.07);
+  border: 1.5px solid rgba(255,255,255,.13);
   border-radius: 999px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   transition: border-color 0.2s;
 }
-.hero-eyebrow-link:hover .hero-eyebrow-badge { border-color: rgba(0,0,0,0.25); }
+.hero-eyebrow-link:hover .hero-eyebrow-badge { border-color: rgba(255,255,255,.3); }
 .hero-new-title {
   font-family: var(--font-display-stack);
   font-size: clamp(52px, 8vw, 100px);
   font-weight: var(--display-weight);
   line-height: 0.97;
   letter-spacing: var(--display-tracking);
-  color: var(--ink);
+  color: #fff;
   padding: 20px 0 28px;
   text-wrap: balance;
   animation: fadeInUp 0.7s ease forwards;
 }
 .hero-new-sub {
   font-size: clamp(16px, 1.5vw, 20px);
-  color: var(--gray-mid);
+  color: rgba(255,255,255,.58);
   letter-spacing: -0.01em;
   line-height: 1.55;
   max-width: 580px;
@@ -270,8 +270,8 @@ button { font: inherit; cursor: pointer; }
   align-items: center;
   justify-content: center;
   padding: 14px 36px;
-  background: var(--ink);
-  color: #fff;
+  background: #fff;
+  color: #07071a;
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -281,15 +281,15 @@ button { font: inherit; cursor: pointer; }
   position: relative;
   z-index: 20;
 }
-.hero-new-cta-btn:hover { background: #2a2a32; transform: translateY(-1px); }
+.hero-new-cta-btn:hover { background: rgba(255,255,255,.88); transform: translateY(-1px); }
 .hero-new-ghost-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 14px 36px;
   background: transparent;
-  color: var(--ink);
-  border: 1.5px solid var(--gray-border);
+  color: rgba(255,255,255,.8);
+  border: 1.5px solid rgba(255,255,255,.2);
   border-radius: 10px;
   font-size: 16px;
   font-weight: 500;
@@ -298,7 +298,7 @@ button { font: inherit; cursor: pointer; }
   transition: border-color 0.2s, transform 0.15s;
   z-index: 20;
 }
-.hero-new-ghost-btn:hover { border-color: #aaa; transform: translateY(-1px); }
+.hero-new-ghost-btn:hover { border-color: rgba(255,255,255,.5); transform: translateY(-1px); }
 .stats-centered {
   margin-top: 60px;
   padding-top: 36px;
@@ -412,6 +412,8 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: -0.6px;
 }
 .stat-lbl { font-size: 13px; color: var(--gray-mid); line-height: 1.4; max-width: 140px; }
+.hero-new .stat-num { color: #fff; }
+.hero-new .stat-lbl { color: rgba(255,255,255,.5); }
 
 .hero-media { position: relative; }
 .hero-video-wrap {
@@ -456,7 +458,7 @@ button { font: inherit; cursor: pointer; }
 .aurora-layer {
   position: absolute;
   inset: -10px;
-  opacity: 0.25;
+  opacity: 0.45;
   will-change: transform;
   filter: blur(40px);
   background-image:
@@ -566,6 +568,17 @@ button { font: inherit; cursor: pointer; }
   100% { transform: translateY(-8px); }
 }
 
+#hero-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+.hero-new .stats-centered { border-top-color: rgba(255,255,255,.12); }
+
 .hero-badge {
   position: absolute;
   bottom: 20px; right: 20px;
@@ -573,15 +586,15 @@ button { font: inherit; cursor: pointer; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 10px 16px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--ink);
-  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  color: rgba(255,255,255,.75);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
 }
 
 .pulse {
