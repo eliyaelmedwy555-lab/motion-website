@@ -247,7 +247,7 @@ button { font: inherit; cursor: pointer; }
   color: var(--ink);
   padding: 20px 0 28px;
   text-wrap: balance;
-  animation: fadeInUp 0.7s ease forwards;
+  animation: fadeInUp 1.2s ease forwards;
 }
 .hero-new-sub {
   font-size: clamp(16px, 1.5vw, 20px);
@@ -256,14 +256,14 @@ button { font: inherit; cursor: pointer; }
   line-height: 1.55;
   max-width: 580px;
   margin-bottom: 44px;
-  animation: fadeInUp 0.7s ease 0.15s forwards;
+  animation: fadeInUp 1.2s ease 0.3s forwards;
 }
 .hero-new-cta-row {
   display: flex;
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
-  animation: fadeInUp 0.7s ease 0.25s forwards;
+  animation: fadeInUp 1.2s ease 0.55s forwards;
 }
 .hero-new-cta-btn {
   display: inline-flex;
@@ -305,7 +305,7 @@ button { font: inherit; cursor: pointer; }
   border-top: 1px solid var(--gray-border);
   justify-content: center;
   grid-template-columns: repeat(3, auto);
-  animation: fadeInUp 0.7s ease 0.35s forwards;
+  animation: fadeInUp 1.2s ease 0.75s forwards;
 }
 .hero-badge-centered {
   margin-top: 32px;
@@ -1219,7 +1219,7 @@ button { font: inherit; cursor: pointer; }
 .hero-new-sub   { opacity: 0; animation-fill-mode: both; }
 .hero-new-cta-row { opacity: 0; animation-fill-mode: both; }
 .stats-centered { opacity: 0; animation-fill-mode: both; }
-.hero-badge-centered { opacity: 0; animation: fadeInUp 0.7s ease 0.45s both; }
+.hero-badge-centered { opacity: 0; animation: fadeInUp 1.0s ease 1.0s both; }
 
 /* ──────────── Button shimmer ──────────── */
 
