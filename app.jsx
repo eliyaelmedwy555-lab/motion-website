@@ -2,7 +2,7 @@
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#4F46E5",
-  "bg": "#0c0c0e",
+  "bg": "#FFFFFF",
   "displayFont": "Inter",
   "displayWeight": 800,
   "displayScale": 1,
@@ -31,7 +31,7 @@ const ACCENT_OPTIONS = [
   "#0EA5E9"  // sky
 ];
 
-const BG_OPTIONS = ["#0c0c0e", "#111116", "#0d0d12", "#07071a"];
+const BG_OPTIONS = ["#FFFFFF", "#F6F6F8", "#F0F0F5", "#0c0c0e"];
 
 const FONT_OPTIONS = [
   "Inter", "Heebo", "Manrope", "Space Grotesk", "Plus Jakarta Sans", "DM Sans"
@@ -125,11 +125,12 @@ function useReveal(threshold = 0.15) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); clearTimeout(timer); } },
       { threshold }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    const timer = setTimeout(() => setInView(true), 3000);
+    return () => { obs.disconnect(); clearTimeout(timer); };
   }, []);
   return [ref, inView];
 }
@@ -169,7 +170,12 @@ function useRevealList(containerRef, selector, staggerMs = 90) {
       { threshold: 0.1 }
     );
     items.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
+    const timer = setTimeout(() => {
+      items.forEach((el, idx) => {
+        setTimeout(() => el.classList.add('in-view'), idx * staggerMs);
+      });
+    }, 3000);
+    return () => { obs.disconnect(); clearTimeout(timer); };
   }, []);
 }
 
@@ -1009,7 +1015,7 @@ function Contact() {
     setSending(true);
     setSubmitError(false);
     try {
-      const res = await fetch("https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID", {
+      const res = await fetch("https://formspree.io/f/xgoqqagz", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(form),
@@ -1219,11 +1225,11 @@ function CinematicFooter() {
           <h2 ref={headlineRef} className="cf2-headline">מוכנים להתחיל?</h2>
           <p className="cf2-sub">שיחת היכרות בחינם, ללא התחייבות.</p>
           <div ref={linksRef} className="cf2-buttons">
-            <Cf2MagneticBtn href="https://wa.me/972500000000" variant="primary">
+            <Cf2MagneticBtn href="https://wa.me/972535406691" variant="primary">
               <WhatsAppIcon />
               <span>WhatsApp</span>
             </Cf2MagneticBtn>
-            <Cf2MagneticBtn href="mailto:hello@motion.co.il">
+            <Cf2MagneticBtn href="mailto:eliyaelmedwy555@gmail.com">
               <MailIcon />
               <span>שלחו מייל</span>
             </Cf2MagneticBtn>

@@ -709,7 +709,7 @@ button { font: inherit; cursor: pointer; }
 
 /* ──────────── Services (numbered list) ──────────── */
 
-.section-services { background: var(--bg); }
+.section-services { background: var(--bg); padding-top: calc(80px * var(--density)); }
 .num-list { list-style: none; border-top: 1px solid var(--gray-border); }
 .num-row {
   display: grid;
@@ -1201,6 +1201,15 @@ button { font: inherit; cursor: pointer; }
 .reveal-d2 { transition-delay: 0.16s; }
 .reveal-d3 { transition-delay: 0.24s; }
 .reveal-d4 { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-scale,
+  .num-row, .step, .pricing-dark-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 
 /* ──────────── Hero animation fill-mode fix ──────────── */
 
