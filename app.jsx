@@ -950,6 +950,26 @@ function Pricing() {
           </p>
         </div>
 
+        {/* [Launch notice] */}
+        <div style={{
+          background: "rgba(79,70,229,0.07)",
+          border: "1.5px solid rgba(79,70,229,0.18)",
+          borderRadius: 14,
+          padding: "14px 24px",
+          textAlign: "center",
+          marginBottom: 32,
+          direction: "rtl",
+          fontSize: 15,
+          color: "#4F46E5",
+          fontWeight: 500,
+        }}>
+          ⏳ <strong>כרגע לא מקבלים תשלומים</strong> — האתר בשלבי הקמה רשמית.{" "}
+          <a href="#contact" style={{ color: "#4F46E5", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
+            שלחו פנייה
+          </a>{" "}
+          ונחזור אליכם ברגע שנפתח רשמית.
+        </div>
+
         {/* [B] Package cards */}
         <div className="pricing-dark-cards">
           {PRICING.map((plan, i) => (
@@ -1015,10 +1035,10 @@ function Contact() {
     setSending(true);
     setSubmitError(false);
     try {
-      const res = await fetch("https://formspree.io/f/xgoqqagz", {
+      const res = await fetch("https://formspree.io/f/maqkkjab", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, _replyto: form.phone }),
       });
       if (res.ok) {
         setSubmitted(true);
@@ -1261,6 +1281,39 @@ function CinematicFooter() {
 
 /* ───────────────────────── App + Tweaks ───────────────────────── */
 
+function LaunchBanner() {
+  const [visible, setVisible] = React.useState(true);
+  if (!visible) return null;
+  return (
+    <div style={{
+      background: "linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)",
+      color: "#fff",
+      textAlign: "center",
+      padding: "10px 48px",
+      fontSize: 14,
+      fontWeight: 500,
+      position: "relative",
+      zIndex: 999,
+      lineHeight: 1.5,
+      direction: "rtl",
+    }}>
+      <span>🚀 האתר בשלבי השקה — כרגע לא מקבלים תשלומים. </span>
+      <a href="#contact" style={{ color: "#fff", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
+        שלחו פנייה עכשיו ותהיו מהלקוחות הראשונים
+      </a>
+      <button
+        onClick={() => setVisible(false)}
+        aria-label="סגור"
+        style={{
+          position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)",
+          background: "none", border: "none", color: "#fff", cursor: "pointer",
+          fontSize: 18, lineHeight: 1, opacity: 0.7, padding: 4,
+        }}
+      >×</button>
+    </div>
+  );
+}
+
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
@@ -1292,6 +1345,7 @@ function App() {
 
   return (
     <>
+      <LaunchBanner />
       <ScrollProgress />
       <Nav />
       <main>
