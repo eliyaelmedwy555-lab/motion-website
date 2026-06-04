@@ -3,7 +3,7 @@
   "outputDirectory": ".",
   "framework": null,
   "rewrites": [
-    { "source": "/jack", "destination": "/jack/index.html" },
-    { "source": "/jack/(.*)", "destination": "/jack/index.html" }
+    { "source": "/clients/jack", "destination": "/clients/jack/index.html" },
+    { "source": "/clients/jack/(.*)", "destination": "/clients/jack/index.html" }
   ]
 }

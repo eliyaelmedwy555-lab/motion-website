@@ -16,6 +16,8 @@ const mime = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.avif': 'image/avif',
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2',
   '.woff': 'font/woff',
@@ -24,10 +26,10 @@ const mime = {
 http.createServer((req, res) => {
   const urlPath = req.url.split('?')[0];
 
-  // SPA rewrite: /jack and /jack/* → jack/index.html (mirrors vercel.json rewrites)
+  // SPA rewrite: /clients/jack and /clients/jack/* → clients/jack/index.html (mirrors vercel.json rewrites)
   let resolvedPath = urlPath;
-  if ((resolvedPath === '/jack' || resolvedPath.startsWith('/jack/')) && !path.extname(resolvedPath)) {
-    resolvedPath = '/jack/index.html';
+  if ((resolvedPath === '/clients/jack' || resolvedPath.startsWith('/clients/jack/')) && !path.extname(resolvedPath)) {
+    resolvedPath = '/clients/jack/index.html';
   }
 
   let filePath = path.join(__dirname, resolvedPath === '/' ? 'index.html' : resolvedPath);

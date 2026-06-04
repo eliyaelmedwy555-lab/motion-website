@@ -1,0 +1,2 @@
+# Transient per-turn flag set by the PostToolUse hook
+.changed-this-turn

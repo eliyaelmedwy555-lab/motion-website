@@ -1,12 +1,20 @@
 /* Motion landing page v2 with comprehensive Tweaks */
 
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  useTweaks, TweaksPanel,
+  TweakSection, TweakColor, TweakSelect, TweakRadio,
+  TweakSlider, TweakText, TweakToggle,
+} from './tweaks-panel.jsx';
+
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#4F46E5",
+  "accent": "#5B2BE0",
   "bg": "#FFFFFF",
-  "displayFont": "Inter",
+  "displayFont": "Frank Ruhl Libre",
   "displayWeight": 800,
   "displayScale": 1,
-  "letterSpacing": -2.5,
+  "letterSpacing": -0.5,
   "radiusCard": 28,
   "radiusSection": 48,
   "containerWidth": 1280,
@@ -17,13 +25,12 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "showStats": true,
   "showHeroBadge": true,
   "showPrices": true,
-  "showConnectors": true,
   "stickyStack": true,
   "workBg": "ink"
 } /*EDITMODE-END*/;
 
 const ACCENT_OPTIONS = [
-  "#4F46E5", // indigo (brand)
+  "#5B2BE0", // electric violet (brand)
   "#0F172A", // ink
   "#10B981", // green
   "#E24B4A", // red
@@ -34,14 +41,14 @@ const ACCENT_OPTIONS = [
 const BG_OPTIONS = ["#FFFFFF", "#F6F6F8", "#F0F0F5", "#0c0c0e"];
 
 const FONT_OPTIONS = [
-  "Inter", "Heebo", "Manrope", "Space Grotesk", "Plus Jakarta Sans", "DM Sans"
+  "Frank Ruhl Libre", "Inter", "Heebo", "Manrope", "Space Grotesk", "Plus Jakarta Sans", "DM Sans"
 ];
 
 /* ───────────────────────── Logo ───────────────────────── */
 
 function Logo({ variant = "light" }) {
   const isDark = variant === "dark";
-  const barColor = isDark ? "#818CF8" : "#4F46E5";
+  const barColor = isDark ? "#9D7BF2" : "#5B2BE0";
   const textColor = isDark ? "#ffffff" : "#0F0F12";
   return (
     <span className="logo" aria-label="motion">
@@ -100,6 +107,12 @@ function IconMessageSquare() {
 }
 function IconTrendingUp() {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>;
+}
+function IconCheck() {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>;
+}
+function IconX() {
+  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
 }
 
 /* ───────────────────────── Animation hooks ───────────────────────── */
@@ -212,7 +225,7 @@ function Nav() {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const sections = ["services", "work", "faq", "pricing", "contact"];
+    const sections = ["services", "work", "about", "faq", "pricing", "contact"];
     function onScroll() {
       const scrollY = window.scrollY + 80;
       let current = "";
@@ -236,6 +249,7 @@ function Nav() {
         <nav className={`nav-links${menuOpen ? " open" : ""}`}>
           <a href="#services" className={active === "services" ? "nav-active" : ""} onClick={closeMenu}>שירותים</a>
           <a href="#work" className={active === "work" ? "nav-active" : ""} onClick={closeMenu}>עבודות</a>
+          <a href="#about" className={active === "about" ? "nav-active" : ""} onClick={closeMenu}>אודות</a>
           <a href="#faq" className={active === "faq" ? "nav-active" : ""} onClick={closeMenu}>שאלות נפוצות</a>
           <a href="#pricing" className={active === "pricing" ? "nav-active" : ""} onClick={closeMenu}>מחירים</a>
           <a href="#contact" className={active === "contact" ? "nav-active" : ""} onClick={closeMenu}>צור קשר</a>
@@ -414,75 +428,500 @@ function Services({ tweaks }) {
 /* ───────────────────────── Process ───────────────────────── */
 
 const STEPS = [
-  { n: "01", name: "שיחה",  desc: "30 דקות בזום או טלפון. מבינים מה צריך, מה לא, ולמי זה מדבר." },
-  { n: "02", name: "עיצוב", desc: "מקבלים מוקאפ ראשון תוך 48 שעות לא פאוורפוינט, אלא קישור חי." },
-  { n: "03", name: "בנייה", desc: "בונים את האתר בצד שלנו. אתם רואים את ההתקדמות, מעירים, מאשרים." },
-  { n: "04", name: "השקה",  desc: "מעלים לדומיין, מחברים אנליטיקס, מסירים לידיים שלכם." },
+  { n: "01", name: "שיחה",  desc: "30 דקות בזום או טלפון. מבינים מה צריך, מה לא, ולמי זה מדבר.", icon: IconMessageSquare },
+  { n: "02", name: "עיצוב", desc: "מקבלים מוקאפ ראשון תוך 48 שעות לא פאוורפוינט, אלא קישור חי.", icon: IconFileText },
+  { n: "03", name: "בנייה", desc: "בונים את האתר בצד שלנו. אתם רואים את ההתקדמות, מעירים, מאשרים.", icon: IconWrench },
+  { n: "04", name: "השקה",  desc: "מעלים לדומיין, מסירים לידיים שלכם.", icon: IconGlobe },
 ];
 
-function Process({ tweaks }) {
-  const stepsRef = React.useRef(null);
-  const sectionRef = React.useRef(null);
-  useRevealList(stepsRef, '.step', 110);
+function Process() {
+  const cardsRef = React.useRef(null);
+  useRevealList(cardsRef, '.process-card', 110);
   const [headRef, headInView] = useReveal();
-  const [activeStep, setActiveStep] = React.useState(-1);
-
-  React.useEffect(() => {
-    function onScroll() {
-      const section = sectionRef.current;
-      if (!section) return;
-      const r = section.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      // progress: 0 when top of section hits bottom of viewport, 1 when section is scrolled past
-      const progress = Math.max(0, Math.min(1, (-r.top + viewH * 0.55) / (r.height * 0.6)));
-      setActiveStep(Math.floor(progress * STEPS.length) - 1);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
-    <section ref={sectionRef} className="section section-process" data-screen-label="04 Process">
+    <section className="section section-process" data-screen-label="04 Process">
       <div className="container">
-        <div ref={headRef} className={`section-head section-head-row reveal${headInView ? ' in-view' : ''}`}>
-          <div>
+        <div className="process-grid">
+          <div ref={headRef} className={`process-intro reveal${headInView ? ' in-view' : ''}`}>
             <span className="eyebrow">
               <span className="eyebrow-dot" />
               תהליך
             </span>
             <h2 className="section-title section-title-xl">איך זה<br />עובד.</h2>
+            <p className="section-sub" style={{ maxWidth: 380 }}>
+              ארבעה שלבים. ממוצע שבוע מהבריף ועד שהאתר באוויר, בלי הפתעות באמצע הדרך.
+            </p>
+            <a href="#contact" className="hero-new-cta-btn process-intro-cta">
+              בואו נתחיל
+              <Arrow />
+            </a>
           </div>
-          <p className="section-sub" style={{ maxWidth: 380 }}>
-            ארבעה שלבים. ממוצע שבוע מהבריף ועד שהאתר באוויר, בלי הפתעות באמצע הדרך.
-          </p>
-        </div>
 
-        <ol ref={stepsRef} className="steps">
-          {STEPS.map((s, i) =>
-            <li key={s.n} className={`step${i <= activeStep ? ' step-active' : ''}`}>
-              <div className="step-top">
-                <span className="step-num">{s.n}</span>
-                {tweaks.showConnectors && i < STEPS.length - 1 &&
-                  <span className={`step-line${i < activeStep ? ' step-line-lit' : ''}`} aria-hidden="true" />}
-              </div>
-              <h3 className="step-name">{s.name}</h3>
-              <p className="step-desc">{s.desc}</p>
-            </li>
-          )}
-        </ol>
+          <ol ref={cardsRef} className="process-cards">
+            {STEPS.map((s) => {
+              const Icon = s.icon;
+              return (
+                <li key={s.n} className="process-card">
+                  <span className="process-card-n" aria-hidden="true">{s.n}</span>
+                  <span className="process-card-icon"><Icon /></span>
+                  <h3 className="process-card-name">{s.name}</h3>
+                  <p className="process-card-desc">{s.desc}</p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </section>
   );
 }
 
 
+/* ───────────────────────── CinematicHeroSection ───────────────────────── */
+
+const CINEMATIC_STYLES = `
+  .gsap-reveal { visibility: hidden; }
+
+  .film-grain {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 50; opacity: 0.05; mix-blend-mode: overlay;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+  }
+
+  .bg-grid-theme {
+    background-size: 60px 60px;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--color-foreground) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-foreground) 5%, transparent) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  }
+
+  .text-3d-matte {
+    color: var(--color-foreground);
+    text-shadow:
+      0 10px 30px color-mix(in srgb, var(--color-foreground) 20%, transparent),
+      0 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent);
+  }
+
+  .text-silver-matte {
+    background: linear-gradient(180deg, var(--color-foreground) 0%, color-mix(in srgb, var(--color-foreground) 40%, transparent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateZ(0);
+    filter:
+      drop-shadow(0px 10px 20px color-mix(in srgb, var(--color-foreground) 15%, transparent))
+      drop-shadow(0px 2px 4px color-mix(in srgb, var(--color-foreground) 10%, transparent));
+  }
+
+  .text-card-silver-matte {
+    background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateZ(0);
+    filter:
+      drop-shadow(0px 12px 24px rgba(0,0,0,0.8))
+      drop-shadow(0px 4px 8px rgba(0,0,0,0.6));
+  }
+
+  .premium-depth-card {
+    background: linear-gradient(145deg, #1c1040 0%, #0F0F12 100%);
+    box-shadow:
+      0 40px 100px -20px rgba(0, 0, 0, 0.9),
+      0 20px 40px -20px rgba(0, 0, 0, 0.8),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
+  }
+
+  .card-sheen {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 50;
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 40%);
+    mix-blend-mode: screen; transition: opacity 0.3s ease;
+  }
+
+  .iphone-bezel {
+    background-color: #111;
+    box-shadow:
+      inset 0 0 0 2px #52525B,
+      inset 0 0 0 7px #000,
+      0 40px 80px -15px rgba(0,0,0,0.9),
+      0 15px 25px -5px rgba(0,0,0,0.7);
+    transform-style: preserve-3d;
+  }
+
+  .hardware-btn {
+    background: linear-gradient(90deg, #404040 0%, #171717 100%);
+    box-shadow:
+      -2px 0 5px rgba(0,0,0,0.8),
+      inset -1px 0 1px rgba(255,255,255,0.15),
+      inset 1px 0 2px rgba(0,0,0,0.8);
+    border-left: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .screen-glare {
+    background: linear-gradient(110deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 45%);
+  }
+
+  .widget-depth {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    box-shadow:
+      0 10px 20px rgba(0,0,0,0.3),
+      inset 0 1px 1px rgba(255,255,255,0.05),
+      inset 0 -1px 1px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .floating-ui-badge {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1),
+      0 25px 50px -12px rgba(0,0,0,0.8),
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -1px 1px rgba(0,0,0,0.5);
+  }
+
+  .btn-modern-light, .btn-modern-dark { transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+
+  .btn-modern-light {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%); color: #0F172A;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.1), 0 12px 24px -4px rgba(0,0,0,0.3), inset 0 1px 1px #fff, inset 0 -3px 6px rgba(0,0,0,0.06);
+  }
+  .btn-modern-light:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 6px 12px -2px rgba(0,0,0,0.15), 0 20px 32px -6px rgba(0,0,0,0.4), inset 0 1px 1px #fff, inset 0 -3px 6px rgba(0,0,0,0.06);
+  }
+  .btn-modern-light:active {
+    transform: translateY(1px);
+    background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1), inset 0 3px 6px rgba(0,0,0,0.1);
+  }
+
+  .btn-modern-dark {
+    background: linear-gradient(180deg, #27272A 0%, #18181B 100%); color: #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.6), 0 12px 24px -4px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -3px 6px rgba(0,0,0,0.8);
+  }
+  .btn-modern-dark:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(180deg, #3F3F46 0%, #27272A 100%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 12px -2px rgba(0,0,0,0.7), 0 20px 32px -6px rgba(0,0,0,1), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(0,0,0,0.8);
+  }
+  .btn-modern-dark:active {
+    transform: translateY(1px); background: #18181B;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 3px 8px rgba(0,0,0,0.9);
+  }
+
+  .progress-ring {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    stroke-dasharray: 402;
+    stroke-dashoffset: 402;
+    stroke-linecap: round;
+  }
+`;
+
+function CinematicHeroSection() {
+  const containerRef = React.useRef(null);
+  const mainCardRef = React.useRef(null);
+  const mockupRef = React.useRef(null);
+  const rafRef = React.useRef(null);
+
+  /* Mouse parallax on the iPhone mockup */
+  React.useEffect(() => {
+    const onMove = (e) => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        if (!mainCardRef.current || !mockupRef.current) return;
+        const rect = mainCardRef.current.getBoundingClientRect();
+        mainCardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        mainCardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        const xVal = (e.clientX / window.innerWidth - 0.5) * 2;
+        const yVal = (e.clientY / window.innerHeight - 0.5) * 2;
+        gsap.to(mockupRef.current, { rotationY: xVal * 12, rotationX: -yVal * 12, ease: "power3.out", duration: 1.2 });
+      });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => { window.removeEventListener("mousemove", onMove); cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  /* Cinematic GSAP scroll timeline */
+  React.useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const ctx = gsap.context(() => {
+      /* Initial states */
+      gsap.set(".text-track",   { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 });
+      gsap.set(".text-days",    { autoAlpha: 1, clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".main-card",    { y: window.innerHeight + 200, autoAlpha: 1 });
+      gsap.set([".card-left-text", ".card-right-text", ".mockup-scroll-wrapper", ".floating-badge", ".phone-widget"], { autoAlpha: 0 });
+      gsap.set(".cta-wrapper",  { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
+
+      /* Entrance animation (fires on mount) */
+      gsap.timeline({ delay: 0.3 })
+        .to(".text-track", { duration: 1.8, autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", rotationX: 0, ease: "expo.out" })
+        .to(".text-days",  { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0");
+
+      /* Scroll-driven timeline */
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=7000",
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
+
+      tl
+        /* Card rises, hero text blurs away */
+        .to([".hero-text-wrapper", ".bg-grid-theme"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
+        .to(".main-card", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
+        /* Card expands fullscreen */
+        .to(".main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.5 })
+        /* Mockup flies in */
+        .fromTo(".mockup-scroll-wrapper",
+          { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
+          { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 }, "-=0.8")
+        .fromTo(".phone-widget",
+          { y: 40, autoAlpha: 0, scale: 0.95 },
+          { y: 0, autoAlpha: 1, scale: 1, stagger: 0.15, ease: "back.out(1.2)", duration: 1.5 }, "-=1.5")
+        /* Progress ring + counter animate */
+        .to(".progress-ring", { strokeDashoffset: 60, duration: 2, ease: "power3.inOut" }, "-=1.2")
+        .to(".counter-val", { innerHTML: 100, snap: { innerHTML: 1 }, duration: 2, ease: "expo.out" }, "-=2.0")
+        /* Badges and text slide in */
+        .fromTo(".floating-badge",
+          { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 },
+          { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
+        .fromTo(".card-left-text",
+          { x: -50, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
+        .fromTo(".card-right-text",
+          { x: 50, autoAlpha: 0, scale: 0.8 },
+          { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
+        /* Hold */
+        .to({}, { duration: 2.5 })
+        /* Swap to CTA */
+        .set(".hero-text-wrapper", { autoAlpha: 0 })
+        .set(".cta-wrapper", { autoAlpha: 1 })
+        .to({}, { duration: 1.5 })
+        /* Card content exits */
+        .to([".mockup-scroll-wrapper", ".floating-badge", ".card-left-text", ".card-right-text"],
+          { scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05 })
+        /* Card shrinks back */
+        .to(".main-card", {
+          width:  isMobile ? "92vw" : "85vw",
+          height: isMobile ? "92vh" : "85vh",
+          borderRadius: isMobile ? "32px" : "40px",
+          ease: "expo.inOut", duration: 1.8,
+        }, "pullback")
+        .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
+        /* Card flies off screen */
+        .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      dir="ltr"
+      data-screen-label="05 Sobers Demo"
+      className="relative w-full h-screen overflow-hidden flex items-center justify-center font-sans antialiased"
+      style={{ background: "var(--bg)", color: "var(--ink)", perspective: "1500px" }}
+    >
+      <style dangerouslySetInnerHTML={{ __html: CINEMATIC_STYLES }} />
+      <div className="film-grain" aria-hidden="true" />
+      <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
+
+      {/* ── Background text layer ── */}
+      <div
+        className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-full px-4 will-change-transform"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
+          עיצוב ופיתוח
+        </h1>
+        <h1 className="text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
+          שמביא לקוחות.
+        </h1>
+      </div>
+
+      {/* ── CTA layer (shown at end of scroll) ── */}
+      <div className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-full px-4 gsap-reveal pointer-events-auto will-change-transform">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-silver-matte">
+          מוכנים להתחיל?
+        </h2>
+        <p className="text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed" style={{ color: "#6B7280" }}>
+          שיחת היכרות בחינם, ללא התחייבות. מהיום ועד השקה — שבוע בממוצע.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <a href="https://wa.me/972535406691" className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]">
+            {/* WhatsApp */}
+            <svg className="w-7 h-7 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span className="text-xl font-bold leading-none tracking-tight">WhatsApp</span>
+          </a>
+          <a href="#work" className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H3m0 0l4-4m-4 4l4 4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span className="text-xl font-bold leading-none tracking-tight">ראו עבודות</span>
+          </a>
+        </div>
+      </div>
+
+      {/* ── Foreground: physical deep-blue card ── */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
+        <div
+          ref={mainCardRef}
+          className="main-card premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[92vw] md:w-[85vw] h-[92vh] md:h-[85vh] rounded-[32px] md:rounded-[40px]"
+        >
+          <div className="card-sheen" aria-hidden="true" />
+
+          {/* Responsive grid: flex-col on mobile, 3-col grid on desktop */}
+          <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
+
+            {/* Brand name — top on mobile, right on desktop */}
+            <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
+              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte">
+                MOTION
+              </h2>
+            </div>
+
+            {/* iPhone mockup — centre */}
+            <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
+              <div className="relative w-full h-full flex items-center justify-center scale-[0.65] md:scale-[0.85] lg:scale-100">
+
+                {/* iPhone bezel */}
+                <div ref={mockupRef} className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform" style={{ transformStyle: "preserve-3d" }}>
+                  {/* Hardware side buttons */}
+                  <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md" aria-hidden="true" />
+                  <div className="absolute top-[160px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md" aria-hidden="true" />
+                  <div className="absolute top-[220px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md" aria-hidden="true" />
+                  <div className="absolute top-[170px] -right-[3px] w-[3px] h-[70px] hardware-btn rounded-r-md" style={{ transform: "scaleX(-1)" }} aria-hidden="true" />
+
+                  {/* Screen */}
+                  <div className="absolute inset-[7px] rounded-[2.5rem] overflow-hidden z-10 text-white" style={{ background: "#050914", boxShadow: "inset 0 0 15px #000" }}>
+                    <div className="absolute inset-0 screen-glare z-40 pointer-events-none" aria-hidden="true" />
+                    {/* Dynamic Island */}
+                    <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[100px] h-[28px] bg-black rounded-full z-50 flex items-center justify-end px-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" style={{ boxShadow: "0 0 8px rgba(34,197,94,0.8)" }} />
+                    </div>
+
+                    {/* App UI */}
+                    <div className="relative w-full h-full pt-12 px-5 pb-8 flex flex-col">
+                      <div className="phone-widget flex justify-between items-center mb-8">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: "#a3a3a3" }}>Motion</span>
+                          <span className="text-xl font-bold tracking-tight text-white">Lighthouse</span>
+                        </div>
+                        <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style={{ background: "rgba(124,58,237,0.15)", color: "#c4b5fd", border: "1px solid rgba(124,58,237,0.3)" }}>M</div>
+                      </div>
+
+                      {/* Progress ring */}
+                      <div className="phone-widget relative w-44 h-44 mx-auto flex items-center justify-center mb-8" style={{ filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.8))" }}>
+                        <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
+                          <circle cx="88" cy="88" r="64" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="12" />
+                          <circle className="progress-ring" cx="88" cy="88" r="64" fill="none" stroke="#7C3AED" strokeWidth="12" />
+                        </svg>
+                        <div className="text-center z-10 flex flex-col items-center">
+                          <span className="counter-val text-4xl font-extrabold tracking-tighter text-white">0</span>
+                          <span className="text-[8px] uppercase font-bold mt-0.5" style={{ color: "rgba(196,181,253,0.5)", letterSpacing: "0.1em" }}>Performance</span>
+                        </div>
+                      </div>
+
+                      {/* Widgets */}
+                      <div className="space-y-3">
+                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.2),rgba(91,43,224,0.05))", border: "1px solid rgba(167,139,250,0.2)" }}>
+                            {/* Zap / speed */}
+                            <svg className="w-4 h-4" fill="none" stroke="rgb(167,139,250)" viewBox="0 0 24 24" aria-hidden="true">
+                              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                            </svg>
+                          </div>
+                          <div className="flex-1">
+                            <div className="h-2 w-20 rounded-full mb-1.5" style={{ background: "rgba(255,255,255,0.15)" }} />
+                            <div className="h-1.5 w-10 rounded-full" style={{ background: "rgba(255,255,255,0.07)" }} />
+                          </div>
+                          <span className="text-[9px] font-bold" style={{ color: "#a78bfa" }}>0.8s</span>
+                        </div>
+                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(16,185,129,0.2),rgba(5,150,105,0.05))", border: "1px solid rgba(52,211,153,0.2)" }}>
+                            {/* Mobile */}
+                            <svg className="w-4 h-4" fill="none" stroke="rgb(52,211,153)" viewBox="0 0 24 24" aria-hidden="true">
+                              <rect x="5" y="2" width="14" height="20" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                              <line x1="12" y1="18" x2="12.01" y2="18" strokeLinecap="round" strokeWidth="2"/>
+                            </svg>
+                          </div>
+                          <div className="flex-1">
+                            <div className="h-2 w-16 rounded-full mb-1.5" style={{ background: "rgba(255,255,255,0.15)" }} />
+                            <div className="h-1.5 w-24 rounded-full" style={{ background: "rgba(255,255,255,0.07)" }} />
+                          </div>
+                          <span className="text-[9px] font-bold" style={{ color: "#34d399" }}>100%</span>
+                        </div>
+                      </div>
+
+                      {/* Home indicator */}
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating glass badges */}
+                <div className="floating-badge absolute flex top-6 floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30" style={{ left: "-15px" }}>
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(180deg,rgba(124,58,237,0.25),rgba(91,43,224,0.1))", border: "1px solid rgba(167,139,250,0.35)" }}>
+                    <span aria-hidden="true">🚀</span>
+                  </div>
+                  <div>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">אתר הושק!</p>
+                    <p className="text-[10px] lg:text-xs font-medium" style={{ color: "rgba(196,181,253,0.6)" }}>תוך 5 ימים בלבד</p>
+                  </div>
+                </div>
+
+                <div className="floating-badge absolute flex bottom-12 lg:bottom-20 floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30" style={{ right: "-15px" }}>
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(180deg,rgba(16,185,129,0.2),rgba(5,150,105,0.1))", border: "1px solid rgba(52,211,153,0.3)" }}>
+                    <span aria-hidden="true">📈</span>
+                  </div>
+                  <div>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">+200% המרות</p>
+                    <p className="text-[10px] lg:text-xs font-medium" style={{ color: "rgba(52,211,153,0.6)" }}>תוצאות מדידות</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Copy — bottom on mobile, left on desktop */}
+            <div className="card-left-text gsap-reveal order-3 lg:order-1 flex flex-col justify-center text-center lg:text-left z-20 w-full px-4 lg:px-0">
+              <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-5 tracking-tight">
+                בניית אתרים, מוגדרת מחדש.
+              </h3>
+              <p className="hidden md:block text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-sm lg:max-w-none" style={{ color: "rgba(219,209,254,0.7)" }}>
+                <span className="text-white font-semibold">Motion</span> בונה אתרי תדמית ודפי נחיתה לעסקים. עיצוב מרהיב, קוד מהיר, והשקה בממוצע תוך שבוע — בלי עיכובים ובלי הפתעות.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ───────────────────────── Work ───────────────────────── */
 
 const WORK = [
-  { n: "01", client: "זיו חשמל+",      kind: "אתר תדמית",  line: "ציוד חשמלי לבית ולמקצוע. 3,000+ מוצרים במלאי, משלוח תוך 24 שעות וייעוץ טכני חינם.",         metric: "3,000+ מוצרים במלאי", palette: ["#0f172a", "#1e3a5f", "#3b82f6"], url: "https://smoke-spkh.vercel.app", domain: "ziv-electrical.co.il" },
-  { n: "02", client: "סלי לוגו",       kind: "דף נחיתה",      line: "סטודיו לעיצוב לוגואים ומיתוג. עיצוב מודרני ונועז לעסקים שרוצים להיזכר.",                        metric: "80+ מותגים",           palette: ["#0d0d0d", "#1a0a0e", "#e8445a"], url: "sali-logo.html",                                                domain: "sali-logo.co.il" },
-  { n: "03", client: "Jack — 3D",       kind: "פורטפוליו",      line: "יוצר תלת-ממד ומעצב תנועה. אנימציות, גרפיקה בתנועה ואמנות דיגיטלית שדוחפת את גבולות היצירתיות.", metric: "60+ פרויקטים",          palette: ["#0c0c0c", "#111a00", "#bfff00"],  url: "/jack/", domain: "jack-3d.co.il" },
+  { n: "01", client: "זיו חשמל+",      kind: "אתר תדמית",  line: "ציוד חשמלי לבית ולמקצוע. 3,000+ מוצרים במלאי, משלוח תוך 24 שעות וייעוץ טכני חינם.",         metric: "3,000+ מוצרים במלאי", palette: ["#0f172a", "#1e3a5f", "#3b82f6"], url: "https://smoke-spkh.vercel.app", domain: "ziv-electrical.co.il", thumb: "assets/work/ziv.webp" },
+  { n: "02", client: "סלי לוגו",       kind: "דף נחיתה",      line: "סטודיו לעיצוב לוגואים ומיתוג. עיצוב מודרני ונועז לעסקים שרוצים להיזכר.",                        metric: "80+ מותגים",           palette: ["#0d0d0d", "#1a0a0e", "#e8445a"], url: "clients/sali-logo.html",                                                domain: "sali-logo.co.il", thumb: "assets/work/sali.webp" },
+  { n: "03", client: "Jack 3D",       kind: "פורטפוליו",      line: "יוצר תלת-ממד ומעצב תנועה. אנימציות, גרפיקה בתנועה ואמנות דיגיטלית שדוחפת את גבולות היצירתיות.", metric: "60+ פרויקטים",          palette: ["#0c0c0c", "#111a00", "#bfff00"],  url: "/clients/jack/index.html", domain: "jack-3d.co.il", thumb: "assets/work/jack.webp" },
 ];
 
 function AnimatedMetric({ raw, inView }) {
@@ -579,7 +1018,16 @@ function WorkCard({ project, index, total, sticky }) {
             <span className="m-tile-dot" />
             <span className="work-card-url">{project.domain}</span>
           </div>
-          {project.url && project.url !== '#' ? (
+          {project.thumb ? (
+            <div className="work-card-iframe-wrap">
+              <img
+                src={project.thumb}
+                alt={`תצוגת האתר של ${project.client}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ) : project.url && project.url !== '#' ? (
             <div className="work-card-iframe-wrap">
               <iframe
                 src={project.url}
@@ -642,8 +1090,8 @@ function Work({ tweaks }) {
 
 const TESTIMONIALS = [
   { name: "רן כהן", role: "בעל עסק, שיפוצניק", text: "קיבלתי אתר מקצועי תוך 6 ימים. הלקוחות מתקשרים דרך האתר כבר מהשבוע הראשון. שווה כל שקל.", result: "+3 לקוחות בשבוע הראשון" },
-  { name: "מיכל לוי", role: "קוסמטיקאית עצמאית", text: "פחדתי שיהיה מסובך. הם ניהלו הכל, אני רק אישרתי. התוצאה יפה מכל מה שדמיינתי — ולקוחות מגיעות מגוגל.", result: "לקוחות חדשות מחיפוש" },
-  { name: "אבי שמש", role: "עורך דין", text: "אתר תדמית שנראה כמו של משרד גדול. לקוחות חדשים מגיעים דרך גוגל — זה לא קרה לי לפני שבניתי את האתר.", result: "נראות מקצועית מידית" },
+  { name: "מיכל לוי", role: "קוסמטיקאית עצמאית", text: "פחדתי שיהיה מסובך. הם ניהלו הכל, אני רק אישרתי. התוצאה יפה מכל מה שדמיינתי, ולקוחות מגיעות מגוגל.", result: "לקוחות חדשות מחיפוש" },
+  { name: "אבי שמש", role: "עורך דין", text: "אתר תדמית שנראה כמו של משרד גדול. לקוחות חדשים מגיעים דרך גוגל. זה לא קרה לי לפני שבניתי את האתר.", result: "נראות מקצועית מידית" },
 ];
 
 function Testimonials() {
@@ -662,7 +1110,7 @@ function Testimonials() {
             <h2 className="section-title section-title-xl">מה אומרים<br />עלינו.</h2>
           </div>
           <p className="section-sub" style={{ maxWidth: 380 }}>
-            לא הבטחות — אנשים שעברו את התהליך ומספרים.
+            לא הבטחות, אנשים שעברו את התהליך ומספרים.
           </p>
         </div>
         <div ref={listRef} className="testimonials-grid">
@@ -689,7 +1137,7 @@ function Testimonials() {
 const FAQS = [
   {
     q: "כמה זמן זה באמת לוקח?",
-    a: "ממוצע 5–7 ימי עבודה מהבריף ועד שהאתר באוויר. אם הפרויקט מורכב יותר, אומרים מראש ומסכימים על לוח זמנים. אין הפתעות באמצע.",
+    a: "ממוצע 5 עד 7 ימי עבודה מהבריף ועד שהאתר באוויר. אם הפרויקט מורכב יותר, אומרים מראש ומסכימים על לוח זמנים. אין הפתעות באמצע.",
   },
   {
     q: "מה קורה אם אני לא מרוצה מהתוצאה?",
@@ -698,10 +1146,6 @@ const FAQS = [
   {
     q: "למה לא פשוט לבנות אתר לבדי?",
     a: "אפשר. אבל אנחנו בונים אתרי פרמיום עם אנימציות תנועה מתקדמות, חוויית משתמש מחושבת, ועיצוב שמרגיש יוקרתי ולא גנרי. זה לא רק אתר שנראה טוב בתמונה, זה אתר שאנשים זוכרים. רמה כזו לוקחת שנות ניסיון, וזמן שלרוב בעלי עסקים פשוט אין.",
-  },
-  {
-    q: "האם האתר כולל SEO?",
-    a: "כן. כל אתר מגיע עם SEO בסיסי: meta tags, sitemap, חיבור ל-Google Search Console ומהירות טעינה מותאמת. SEO מתקדם זמין בהתאמה אישית.",
   },
   {
     q: "מה כולל התחזוקה החודשית?",
@@ -737,7 +1181,7 @@ function FaqItem({ item, index }) {
         </span>
         <span style={{
           width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
-          background: open ? "var(--accent,#4F46E5)" : "rgba(0,0,0,0.06)",
+          background: open ? "var(--accent,#5B2BE0)" : "rgba(0,0,0,0.06)",
           color: open ? "#fff" : "#0F0F12",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: 18, lineHeight: 1,
@@ -791,6 +1235,249 @@ function FAQ() {
   );
 }
 
+/* ───────────────────────── Why a website ───────────────────────── */
+
+const WHY_STATS = [
+  {
+    target: 75,
+    title: "שופטים את אמינות העסק לפי האתר",
+    body: "שלושה מכל ארבעה לקוחות מחליטים אם אפשר לסמוך עליכם, לפי האתר בלבד, עוד לפני שדיברתם.",
+  },
+  {
+    target: 80,
+    title: "מחפשים בגוגל לפני שקונים",
+    body: "עוד לפני שהרימו טלפון, הלקוחות כבר בדקו אתכם אונליין. השאלה היחידה היא מה הם מצאו.",
+  },
+  {
+    display: "24/7",
+    title: "האתר עובד גם כשאתם ישנים",
+    body: "168 שעות בשבוע של נוכחות ושיווק שמביא פניות בלילה, בשבת ובחג, בלי לשלם משכורת.",
+  },
+];
+
+const CONVERSION_BARS = [
+  { label: "אתר רגיל", value: "עד 3%", w: 12 },
+  { label: "דף נחיתה ממוקד", value: "עד 26%", w: 100, strong: true },
+];
+
+function WhyStat({ stat }) {
+  const [ref, inView] = useReveal();
+  const count = useCounter(stat.target || 0, inView);
+  const display = stat.target ? count + "%" : stat.display;
+  return (
+    <div ref={ref} className={`whyx-stat reveal${inView ? ' in-view' : ''}`}>
+      <span className="whyx-stat-num">{display}</span>
+      <h3 className="whyx-stat-title">{stat.title}</h3>
+      <p className="whyx-stat-body">{stat.body}</p>
+    </div>
+  );
+}
+
+function ConversionBars() {
+  const [ref, inView] = useReveal();
+  return (
+    <div ref={ref} className={`whyx-conv reveal${inView ? ' in-view' : ''}`}>
+      <div className="whyx-conv-head">
+        <h3 className="whyx-conv-title">אותו תקציב פרסום, פי כמה לקוחות</h3>
+        <p className="whyx-conv-sub">
+          אתר תדמית בונה אמון. דף נחיתה ממוקד גורם לפעולה. כשמסירים את כל הסחות הדעת ומשאירים מסר אחד ופעולה אחת, אחוזי ההמרה מזנקים:
+        </p>
+      </div>
+      <div className="whyx-bars">
+        {CONVERSION_BARS.map((row, i) => (
+          <div key={i} className="whyx-bar-row">
+            <div className="whyx-bar-top">
+              <span className="whyx-bar-label">{row.label}</span>
+              <span className={`whyx-bar-val${row.strong ? ' is-strong' : ''}`}>{row.value}</span>
+            </div>
+            <div className="whyx-bar-track">
+              <div
+                className={`whyx-bar-fill${row.strong ? ' is-strong' : ''}${inView ? ' in-view' : ''}`}
+                style={{ '--w': row.w + '%', transitionDelay: i * 0.12 + 's' }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="whyx-conv-foot">
+        אותם גולשים, אותו תקציב פרסום, אבל פי כמה לקוחות משלמים. זה ההבדל בין לשרוף תקציב לבין להחזיר אותו פי כמה.
+      </p>
+    </div>
+  );
+}
+
+function WhyWebsite() {
+  const [headRef, headInView] = useReveal();
+  const [ctaRef, ctaInView] = useReveal();
+  return (
+    <section id="why-website" className="section section-need" data-screen-label="Why a website">
+      <div className="container">
+        <div ref={headRef} className={`section-head reveal${headInView ? ' in-view' : ''}`}
+          style={{ textAlign: 'center', marginBottom: 16 }}>
+          <span className="eyebrow" style={{ display: 'inline-flex', margin: '0 auto 16px' }}>
+            <span className="eyebrow-dot" />
+            למה אתר
+          </span>
+          <h2 className="section-title section-title-xl" style={{ textAlign: 'center' }}>
+            האתר שלך מחליט אם בוחרים בך
+          </h2>
+          <p className="section-sub" style={{ textAlign: 'center', maxWidth: 600, margin: '16px auto 44px' }}>
+            בזמן שאתם קוראים את זה, מישהו חיפש עסק כמו שלכם, ובחר במתחרה שכבר נמצא אונליין. ככה המחקרים מוכיחים את זה:
+          </p>
+        </div>
+
+        <div className="whyx-stats">
+          {WHY_STATS.map((stat, i) => <WhyStat key={i} stat={stat} />)}
+        </div>
+
+        <ConversionBars />
+
+        <div ref={ctaRef} className={`need-cta reveal${ctaInView ? ' in-view' : ''}`}>
+          <a href="#contact" className="need-cta-link">רוצים אתר שמביא לקוחות? דברו איתי ←</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── Why Motion ───────────────────────── */
+
+const WHYMOTION = [
+  {
+    icon: <IconMessageSquare />,
+    title: "תקשורת ישירה",
+    body: "מדברים ישירות עם מי שבונה את האתר. לא מנהל חשבון, לא מתווך.",
+  },
+  {
+    icon: <IconZap />,
+    title: "קוד מקצועי",
+    body: "React ו-Tailwind, לא Wix. אתר שנטען מהר ועובד בכל מכשיר.",
+  },
+  {
+    icon: <IconTarget />,
+    title: "5 ימים בממוצע",
+    body: "מתחילים, בונים, משיקים. בלי שבועות של המתנה.",
+  },
+  {
+    icon: <IconGlobe />,
+    title: "ישראלי ומקומי",
+    body: "מכיר את השוק, זמין בוואטסאפ, מדבר בשפה שלכם.",
+  },
+  {
+    icon: <IconShield />,
+    title: "מחיר שקוף",
+    body: "אין 'תתקשרו לקבל מחיר'. הכל כתוב, בלי הפתעות בדרך.",
+  },
+  {
+    icon: <IconTrendingUp />,
+    title: "מותאם לנייד",
+    body: "נבנה ראשית למובייל, לא מותאם בדיעבד. 100% מהיום הראשון.",
+  },
+];
+
+const SITE_INCLUDES = [
+  "אנימציות תנועה ומעברים חלקים בגלילה",
+  "עיצוב מותאם אישית, לא תבנית מוכנה",
+  "טעינה מהירה (React + Tailwind, לא Wix)",
+  "100% מותאם לנייד מהיום הראשון",
+  "טופס לידים וכפתור וואטסאפ ישיר מהאתר",
+];
+
+const COMPARE_BAD = [
+  "תבנית מוכנה שנראית כמו כולם",
+  "סטטי, בלי תנועה או חיים",
+  "איטי לטעינה",
+  "אתה לבד מול תמיכה אוטומטית",
+  "\"מספיק טוב\", לא בלתי-נשכח",
+];
+
+const COMPARE_GOOD = [
+  "עיצוב ייחודי שנבנה רק לכם",
+  "אנימציות תנועה חיות שמושכות את העין",
+  "נטען מהיר (React + Tailwind)",
+  "מדברים ישירות איתי, בלי מתווכים",
+  "חוויה שלקוחות זוכרים וחוזרים אליה",
+];
+
+function WhyMotion() {
+  const [headRef, headInView] = useReveal();
+  const [includesRef, includesInView] = useReveal();
+  const [compareRef, compareInView] = useReveal();
+  const gridRef = React.useRef(null);
+  useRevealList(gridRef, ".why-card", 80);
+  return (
+    <section id="about" className="section section-why" data-screen-label="05 About">
+      <div className="container">
+        <div ref={headRef} className={`section-head reveal${headInView ? ' in-view' : ''}`}
+          style={{ textAlign: 'center', marginBottom: 16 }}>
+          <span className="eyebrow" style={{ display: 'inline-flex', margin: '0 auto 16px' }}>
+            <span className="eyebrow-dot" />
+            מאחורי Motion
+          </span>
+          <h2 className="section-title section-title-xl" style={{ textAlign: 'center' }}>
+            אז מי אני?
+          </h2>
+          <p className="section-sub" style={{ textAlign: 'center', maxWidth: 560, margin: '16px auto 40px' }}>
+            אני אליה, מפתח אתרים עצמאי מישראל, ואני לא בונה אתרים רגילים.
+            אני בונה אתרים עם אנימציות תנועה חיות, חוויית משתמש מחושבת ועיצוב שמרגיש יוקרתי,
+            בלי המחיר היוקרתי. הרמה של סטודיו גדול, במחיר שעסק קטן יכול להרשות לעצמו.
+            וכשאתם עובדים איתי, אתם מדברים ישירות איתי, בלי מתווכים.
+          </p>
+        </div>
+        <div ref={gridRef} className="why-grid">
+          {WHYMOTION.map((item, i) => (
+            <div key={i} className="why-card reveal">
+              <span className="why-card-icon">{item.icon}</span>
+              <h3 className="why-card-title">{item.title}</h3>
+              <p className="why-card-body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div ref={includesRef} className={`includes-block reveal${includesInView ? ' in-view' : ''}`}>
+          <h3 className="includes-title">מה כל אתר כולל</h3>
+          <ul className="includes-list">
+            {SITE_INCLUDES.map((item, i) => (
+              <li key={i} className="includes-item">
+                <span className="includes-check"><IconCheck /></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div ref={compareRef} className={`compare-block reveal${compareInView ? ' in-view' : ''}`}>
+          <h3 className="compare-title">ההבדל בין אתר רגיל לאתר של Motion</h3>
+          <div className="compare-cols">
+            <div className="compare-col compare-col-bad">
+              <span className="compare-col-title">אתר תבנית רגיל</span>
+              <ul className="compare-list">
+                {COMPARE_BAD.map((item, i) => (
+                  <li key={i} className="compare-item">
+                    <span className="compare-mark"><IconX /></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="compare-col compare-col-good">
+              <span className="compare-col-title">אתר של Motion</span>
+              <ul className="compare-list">
+                {COMPARE_GOOD.map((item, i) => (
+                  <li key={i} className="compare-item">
+                    <span className="compare-mark"><IconCheck /></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ───────────────────────── Pricing ───────────────────────── */
 
 const PRICING = [
@@ -799,6 +1486,7 @@ const PRICING = [
     badge: null,
     desc: "דף ממוקד אחד לקמפיין או עסק.",
     setupFrom: "1,500",
+    setupNoMaint: "1,200",
     monthly: "300",
     features: [
       "עיצוב UI/UX מותאם",
@@ -815,11 +1503,11 @@ const PRICING = [
     badge: "הכי פופולרי",
     desc: "אתר 5 עמודים לעסק שרוצה להיראות מקצועי.",
     setupFrom: "2,500",
+    setupNoMaint: "2,000",
     monthly: "300",
     features: [
       "עיצוב UI/UX מותאם",
       "5 עמודים",
-      "אנליטיקס + SEO בסיסי",
       "וואטסאפ שיחה מהאתר",
       "עד 3 סבבי תיקונים",
       "מותאם לנייד",
@@ -831,7 +1519,7 @@ const PRICING = [
 
 /* ── Pricing sub-components ── */
 
-function PricingCard({ plan }) {
+function PricingCard({ plan, withMaintenance }) {
   const [ref, inView] = useReveal(0.1);
   return (
     <div ref={ref} className={`pricing-dark-card${plan.highlight ? ' pricing-dark-card-pop' : ''}${inView ? ' in-view' : ''}`}>
@@ -841,14 +1529,16 @@ function PricingCard({ plan }) {
       <div className="pricing-dark-price-block">
         <div className="pricing-dark-price-row">
           <span className="pricing-dark-currency">₪</span>
-          <span className="pricing-dark-price">{plan.setupFrom}</span>
+          <span className="pricing-dark-price">{withMaintenance ? plan.setupFrom : plan.setupNoMaint}</span>
           <span className="pricing-dark-price-label">הקמה מ</span>
         </div>
-        <div className="pricing-dark-monthly-row">
-          <span className="pricing-dark-plus">+</span>
-          <span className="pricing-dark-monthly-price">₪{plan.monthly}</span>
-          <span className="pricing-dark-monthly-label">/חודש תחזוקה</span>
-        </div>
+        {withMaintenance && (
+          <div className="pricing-dark-monthly-row">
+            <span className="pricing-dark-plus">+</span>
+            <span className="pricing-dark-monthly-price">₪{plan.monthly}</span>
+            <span className="pricing-dark-monthly-label">/חודש תחזוקה</span>
+          </div>
+        )}
       </div>
       <ul className="pricing-dark-features">
         {plan.features.map((f, i) => {
@@ -869,26 +1559,30 @@ function PricingCard({ plan }) {
 }
 
 const PHASES = [
-  { n: "01", name: "אפיון" },
-  { n: "02", name: "עיצוב" },
-  { n: "03", name: "פיתוח" },
-  { n: "04", name: "בדיקות" },
-  { n: "05", name: "עלייה לאוויר" },
+  { n: "01", name: "אפיון",        h: 56 },
+  { n: "02", name: "עיצוב",        h: 84 },
+  { n: "03", name: "פיתוח",        h: 112 },
+  { n: "04", name: "בדיקות",       h: 140 },
+  { n: "05", name: "עלייה לאוויר", h: 168 },
 ];
 
 function PricingProcess() {
+  const [ref, inView] = useReveal(0.3);
   return (
-    <div className="pricing-process-strip">
+    <div ref={ref} className={`pricing-process-strip${inView ? ' in-view' : ''}`}>
       <div className="pricing-process-label">תהליך העבודה</div>
-      <div className="pricing-process-steps">
+      {/* Ascending pillars — grow from the baseline on scroll, RTL so they rise right→left. */}
+      <div className="pricing-process-chart" role="list">
         {PHASES.map((phase, i) => (
-          <React.Fragment key={phase.n}>
-            <div className="pricing-process-step">
-              <span className="pricing-process-num">{phase.n}</span>
-              <span className="pricing-process-name">{phase.name}</span>
+          <div key={phase.n} className="pricing-process-pillar" role="listitem">
+            <div
+              className="pricing-process-bar"
+              style={{ '--bar-h': `${phase.h}px`, '--bar-delay': `${i * 0.12}s` }}
+            >
+              <span className="pricing-process-bar-num">{phase.n}</span>
             </div>
-            {i < PHASES.length - 1 && <span className="pricing-process-line" aria-hidden="true" />}
-          </React.Fragment>
+            <span className="pricing-process-pillar-name">{phase.name}</span>
+          </div>
         ))}
       </div>
     </div>
@@ -903,7 +1597,30 @@ const MONTHLY_INCLUDES = [
   { icon: <IconMessageSquare />, label: "תמיכה טכנית" },
 ];
 
-function PricingMonthly() {
+function PricingMonthly({ withMaintenance }) {
+  if (!withMaintenance) {
+    return (
+      <div className="pricing-no-maint-box">
+        <div className="pricing-no-maint-header">
+          <span className="pricing-no-maint-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </span>
+          <span className="pricing-no-maint-title">ללא תחזוקה, לא כולל:</span>
+        </div>
+        <div className="pricing-no-maint-grid">
+          {MONTHLY_INCLUDES.map((item, i) => (
+            <div key={i} className="pricing-no-maint-item">
+              <span className="pricing-no-maint-item-icon">{item.icon}</span>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="pricing-no-maint-note">מומלץ למי שכבר יש לו אחסון ומכיר את התחום. תצטרכו לנהל את כל אלה בעצמכם.</p>
+      </div>
+    );
+  }
   return (
     <div className="pricing-monthly-box">
       <div className="pricing-monthly-header">
@@ -927,6 +1644,7 @@ function PricingMonthly() {
 
 function Pricing() {
   const [headRef, headInView] = useReveal();
+  const [withMaintenance, setWithMaintenance] = React.useState(true);
   return (
     <section
       id="pricing"
@@ -937,7 +1655,7 @@ function Pricing() {
 
         {/* [A] Header */}
         <div ref={headRef} className={`section-head reveal${headInView ? ' in-view' : ''}`}
-          style={{ textAlign: 'center', marginBottom: 56 }}>
+          style={{ textAlign: 'center', marginBottom: 40 }}>
           <span className="eyebrow" style={{ display: 'inline-flex', margin: '0 auto 16px' }}>
             <span className="eyebrow-dot" />
             מחירים
@@ -950,21 +1668,40 @@ function Pricing() {
           </p>
         </div>
 
+        {/* [Toggle] */}
+        <div className="pricing-toggle-wrap">
+          <button
+            className={`pricing-toggle-btn${withMaintenance ? ' active' : ''}`}
+            onClick={() => setWithMaintenance(true)}
+          >
+            עם תחזוקה
+          </button>
+          <button
+            className={`pricing-toggle-btn${!withMaintenance ? ' active' : ''}`}
+            onClick={() => setWithMaintenance(false)}
+          >
+            ללא תחזוקה
+          </button>
+        </div>
+
         {/* [Launch notice] */}
         <div style={{
-          background: "rgba(79,70,229,0.07)",
-          border: "1.5px solid rgba(79,70,229,0.18)",
+          background: "rgba(91,43,224,0.07)",
+          border: "1.5px solid rgba(91,43,224,0.18)",
           borderRadius: 14,
           padding: "14px 24px",
           textAlign: "center",
           marginBottom: 32,
           direction: "rtl",
           fontSize: 15,
-          color: "#4F46E5",
+          color: "#5B2BE0",
           fontWeight: 500,
         }}>
-          ⏳ <strong>כרגע לא מקבלים תשלומים</strong> — האתר בשלבי הקמה רשמית.{" "}
-          <a href="#contact" style={{ color: "#4F46E5", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: "inline-block", verticalAlign: "-2px", marginInlineEnd: 6 }}>
+            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+          </svg>
+          <strong>כרגע לא מקבלים תשלומים</strong>. האתר בשלבי הקמה רשמית.{" "}
+          <a href="#contact" style={{ color: "#5B2BE0", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
             שלחו פנייה
           </a>{" "}
           ונחזור אליכם ברגע שנפתח רשמית.
@@ -973,12 +1710,12 @@ function Pricing() {
         {/* [B] Package cards */}
         <div className="pricing-dark-cards">
           {PRICING.map((plan, i) => (
-            <PricingCard key={i} plan={plan} />
+            <PricingCard key={i} plan={plan} withMaintenance={withMaintenance} />
           ))}
         </div>
 
-        {/* [C] Monthly includes */}
-        <PricingMonthly />
+        {/* [C] Monthly includes / not-included */}
+        <PricingMonthly withMaintenance={withMaintenance} />
 
         {/* [D] Process */}
         <PricingProcess />
@@ -1173,7 +1910,7 @@ function Cf2MagneticBtn({ href, children, variant, onClick }) {
 const CF2_TICKER = [
   "בניית אתרים מקצועית", "✦", "עיצוב שממיר לקוחות", "✦",
   "חוויית משתמש מושלמת", "✦", "קוד מהיר ונקי", "✦",
-  "מותאם לכל מכשיר", "✦", "SEO אמיתי", "✦",
+  "מותאם לכל מכשיר", "✦",
 ];
 
 function CinematicFooter() {
@@ -1265,7 +2002,11 @@ function CinematicFooter() {
           <Logo variant="dark" />
           <div className="cf2-badge">
             <span>נבנה עם</span>
-            <span className="cf2-heart">❤</span>
+            <span className="cf2-heart" aria-label="אהבה">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </span>
             <span>על ידי Motion</span>
           </div>
           <button className="cf2-top-btn" onClick={scrollToTop} aria-label="חזרה למעלה">
@@ -1285,30 +2026,16 @@ function LaunchBanner() {
   const [visible, setVisible] = React.useState(true);
   if (!visible) return null;
   return (
-    <div style={{
-      background: "linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)",
-      color: "#fff",
-      textAlign: "center",
-      padding: "10px 48px",
-      fontSize: 14,
-      fontWeight: 500,
-      position: "relative",
-      zIndex: 999,
-      lineHeight: 1.5,
-      direction: "rtl",
-    }}>
-      <span>🚀 האתר בשלבי השקה — כרגע לא מקבלים תשלומים. </span>
-      <a href="#contact" style={{ color: "#fff", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
+    <div className="launch-banner">
+      <span className="launch-banner-dot" aria-hidden="true"></span>
+      <span>האתר בשלבי השקה, כרגע לא מקבלים תשלומים. </span>
+      <a href="#contact" className="launch-banner-link">
         שלחו פנייה עכשיו ותהיו מהלקוחות הראשונים
       </a>
       <button
         onClick={() => setVisible(false)}
         aria-label="סגור"
-        style={{
-          position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)",
-          background: "none", border: "none", color: "#fff", cursor: "pointer",
-          fontSize: 18, lineHeight: 1, opacity: 0.7, padding: 4,
-        }}
+        className="launch-banner-close"
       >×</button>
     </div>
   );
@@ -1345,14 +2072,16 @@ function App() {
 
   return (
     <>
-      <LaunchBanner />
+      <a href="#main" className="skip-link">דלג לתוכן</a>
       <ScrollProgress />
       <Nav />
-      <main>
-        <Hero tweaks={t} />
+      <main id="main" tabIndex={-1}>
+        <CinematicHeroSection />
+        <WhyWebsite />
         <Services tweaks={t} />
-        <Process tweaks={t} />
+        <Process />
         <Work tweaks={t} />
+        <WhyMotion />
         <FAQ />
         <Pricing />
         <Contact />
@@ -1408,10 +2137,6 @@ function App() {
         <TweakToggle label="הצג תגי מחיר" value={t.showPrices}
           onChange={(v) => setTweak("showPrices", v)} />
 
-        <TweakSection label="תהליך" />
-        <TweakToggle label="קווי חיבור" value={t.showConnectors}
-          onChange={(v) => setTweak("showConnectors", v)} />
-
         <TweakSection label="עבודות" />
         <TweakToggle label="הצמדה ודחיסה" value={t.stickyStack}
           onChange={(v) => setTweak("stickyStack", v)} />
@@ -1423,4 +2148,4 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(<App />);
