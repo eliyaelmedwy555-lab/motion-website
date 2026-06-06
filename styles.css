@@ -3396,3 +3396,49 @@ button { font: inherit; cursor: pointer; }
   padding-top: 12px;
   margin-top: 4px;
 }
+.hero-scroll-hint {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.7;
+}
+/* כפתור גלילה קבוע שנעלם בגלילה */
+
+body::after {
+    content: "גללו למטה ↓";
+    position: fixed; /* קבוע על המסך */
+    bottom: 40px; /* מרחק מתחתית המסך */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* עיצוב הטקסט */
+    color: #5B2BE0; /* הסגול של המותג שלך */
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px; /* מוגדל מעט */
+    font-weight: 700; /* מודגש (Bold) */
+    
+    /* עיצוב הרקע להבלטה מקסימלית */
+    background-color: rgba(255, 255, 255, 0.9); /* רקע לבן כמעט מלא כדי שיבלוט על כל רקע */
+    padding: 10px 22px; /* מרווח פנימי שיוצר צורת קפסולה */
+    border-radius: 50px; /* פינות מעוגלות לחלוטין */
+    box-shadow: 0 4px 15px rgba(91, 43, 224, 0.15); /* צל סגול עדין שנותן נפח */
+    border: 1px solid rgba(91, 43, 224, 0.1); /* מסגרת סגולה סופר עדינה */
+    
+    /* התנהגות ואנימציה */
+    z-index: 9999;
+    pointer-events: none;
+    animation: simpleBounce 2s infinite, fadeOutWithScroll linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 150px; /* ייעלם קצת יותר מהר כדי שלא יפריע למסך הבא */
+}
+
+/* אנימציית קפיצה עדינה */
+@keyframes simpleBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* אנימציית היעלמות בגלילה */
+@keyframes fadeOutWithScroll {
+    to { opacity: 0; visibility: hidden; }
+}

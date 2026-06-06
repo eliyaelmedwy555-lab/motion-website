@@ -340,7 +340,8 @@ function Hero({ tweaks }) {
         <div className="hero-new-cta-row">
           <a href="#contact" className="hero-new-cta-btn">התחל עכשיו</a>
           <a href="#work" className="hero-new-ghost-btn">ראה עבודות</a>
-        </div>
+  
+
 
         {tweaks.showStats &&
           <ul ref={statsRef} className="stats stats-centered">
