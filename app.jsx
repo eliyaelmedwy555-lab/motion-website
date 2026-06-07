@@ -307,28 +307,35 @@ function ChevronLeft() {
 }
 
 function Hero({ tweaks }) {
-  const [statsRef, statsInView] = useReveal(0.5);
   const [parallaxY, setParallaxY] = React.useState(0);
-  React.useEffect(() => {
-    const onScroll = () => setParallaxY(window.scrollY);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  const py = parallaxY * 0.28;
-  return (
-    <section className="hero-new" data-screen-label="01 Hero">
-      <div className="aurora-bg" style={{ transform: `translateY(${parallaxY * 0.12}px)` }}>
-        <div className="aurora-layer" />
-      </div>
-      <div className="hero-grid-bg" style={{ transform: `translateY(${parallaxY * 0.08}px)` }} />
-      <div className="hero-radial-accent" />
+  const statsRef = React.useRef(null);
+  const [statsInView, setStatsInView] = React.useState(false);
 
-      <div className="hero-new-inner" style={{ transform: `translateY(${-py}px)` }}>
-        <span className="hero-eyebrow-link">
-          <span className="hero-eyebrow-badge">
-            <ChevronLeft />
-            שירותי בניית אתרים · ישראל
-          </span>
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setParallaxY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  React.useEffect(() => {
+    if (!statsRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setStatsInView(true);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="hero-new-sec">
+      <div className="hero-new-inner">
+        <span className="hero-new-tag">
+          שירותי בניית אתרים · ישראל
         </span>
 
         <h1 className="hero-new-title">
@@ -340,8 +347,7 @@ function Hero({ tweaks }) {
         <div className="hero-new-cta-row">
           <a href="#contact" className="hero-new-cta-btn">התחל עכשיו</a>
           <a href="#work" className="hero-new-ghost-btn">ראה עבודות</a>
-  
-
+        </div>
 
         {tweaks.showStats &&
           <ul ref={statsRef} className="stats stats-centered">
@@ -378,7 +384,6 @@ function Hero({ tweaks }) {
     </section>
   );
 }
-
 /* ───────────────────────── Services ───────────────────────── */
 
 const SERVICES = [
