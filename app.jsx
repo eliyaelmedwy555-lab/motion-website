@@ -752,10 +752,10 @@ function CinematicHeroSection() {
         style={{ transformStyle: "preserve-3d" }}
       >
         <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
-          עיצוב ופיתוח
+        עיצוב ופיתוח
         </h1>
         <h1 className="text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
-          שמביא לקוחות.
+          שמביא לקוחות
         </h1>
       </div>
 
