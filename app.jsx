@@ -654,7 +654,7 @@ function CinematicHeroSection() {
 
   /* Mouse parallax on the iPhone mockup */
   React.useEffect(() => {
-    if (REDUCED_MOTION) return;
+    if (REDUCED_MOTION || !window.gsap) return;
     const onMove = (e) => {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -1225,7 +1225,8 @@ function FaqItem({ item, index }) {
           +
         </span>
       </button>
-      <div id={`faq-panel-${index}`} role="region" style={{
+      {/* aria-hidden when closed: maxHeight:0 hides visually but not from the a11y tree */}
+      <div id={`faq-panel-${index}`} role="region" aria-hidden={!open} style={{
         maxHeight: open ? "320px" : "0",
         overflow: "hidden",
         transition: REDUCED_MOTION ? "none" : "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)",

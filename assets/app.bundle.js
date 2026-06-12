@@ -6554,7 +6554,7 @@ const Np = `
 function Sp() {
   const e = z.useRef(null), t = z.useRef(null), n = z.useRef(null), r = z.useRef(null);
   return z.useEffect(() => {
-    if (we) return;
+    if (we || !window.gsap) return;
     const l = (i) => {
       cancelAnimationFrame(r.current), r.current = requestAnimationFrame(() => {
         if (!t.current || !n.current) return;
@@ -6952,7 +6952,7 @@ function zp({ item: e, index: t }) {
             ]
           }
         ),
-        /* @__PURE__ */ o.jsx("div", { id: `faq-panel-${t}`, role: "region", style: {
+        /* @__PURE__ */ o.jsx("div", { id: `faq-panel-${t}`, role: "region", "aria-hidden": !n, style: {
           maxHeight: n ? "320px" : "0",
           overflow: "hidden",
           transition: we ? "none" : "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)"
