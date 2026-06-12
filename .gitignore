@@ -6,6 +6,8 @@ about me/
 CLAUDE (2).md
 skills-lock.json
 *.png
+!assets/screenshot-preview.png
+temporary screenshots/
 
 .vercel
 jack-portfolio/dist/

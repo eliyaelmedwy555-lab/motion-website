@@ -32,6 +32,8 @@
 }
 
 html { scroll-behavior: smooth; }
+/* anchor targets land with air below the fixed nav instead of flush under it */
+[id] { scroll-margin-top: 84px; }
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -1377,11 +1379,20 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left, .reveal-scale,
-  .num-row, .process-card, .pricing-dark-card {
+  .num-row, .process-card, .pricing-dark-card,
+  .step, .faq-item, .work-card {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
+  /* global kill-switch: collapse every CSS animation/transition to its end
+     state (fill-mode keeps the final keyframe, so nothing stays hidden) */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
 }
 
 /* ──────────── Hero animation fill-mode fix ──────────── */

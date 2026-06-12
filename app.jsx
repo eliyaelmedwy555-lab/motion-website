@@ -8,6 +8,13 @@ import {
   TweakSlider, TweakText, TweakToggle,
 } from './tweaks-panel.jsx';
 
+/* a11y: when the visitor asks the OS for reduced motion, every JS-driven
+   animation (GSAP, counters, parallax, tilt) must collapse to a static state. */
+const REDUCED_MOTION =
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#5B2BE0",
   "bg": "#FFFFFF",
@@ -133,8 +140,9 @@ function useScrollProgress() {
 
 function useReveal(threshold = 0.15) {
   const ref = React.useRef(null);
-  const [inView, setInView] = React.useState(false);
+  const [inView, setInView] = React.useState(REDUCED_MOTION);
   React.useEffect(() => {
+    if (REDUCED_MOTION) return;
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -149,8 +157,9 @@ function useReveal(threshold = 0.15) {
 }
 
 function useCounter(target, inView, duration = 1200) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(REDUCED_MOTION ? target : 0);
   React.useEffect(() => {
+    if (REDUCED_MOTION) { setValue(target); return; }
     if (!inView || target <= 0) return;
     const start = Date.now();
     const tick = () => {
@@ -170,6 +179,10 @@ function useRevealList(containerRef, selector, staggerMs = 90) {
     const container = containerRef.current;
     if (!container) return;
     const items = Array.from(container.querySelectorAll(selector));
+    if (REDUCED_MOTION) {
+      items.forEach(el => el.classList.add('in-view'));
+      return;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -512,7 +525,8 @@ const CINEMATIC_STYLES = `
   }
 
   .text-silver-matte {
-    background: linear-gradient(180deg, var(--color-foreground) 0%, color-mix(in srgb, var(--color-foreground) 40%, transparent) 100%);
+    /* bottom stop kept at >=72% ink so the faded edge still passes 4.5:1 on white */
+    background: linear-gradient(180deg, var(--color-foreground) 0%, color-mix(in srgb, var(--color-foreground) 72%, transparent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -640,6 +654,7 @@ function CinematicHeroSection() {
 
   /* Mouse parallax on the iPhone mockup */
   React.useEffect(() => {
+    if (REDUCED_MOTION) return;
     const onMove = (e) => {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -658,6 +673,15 @@ function CinematicHeroSection() {
 
   /* Cinematic GSAP scroll timeline */
   React.useEffect(() => {
+    /* Reduced motion (or GSAP failed to load): no pin, no scroll-jacking —
+       show the headline statically and drop the card/CTA layers entirely. */
+    if (REDUCED_MOTION || !window.gsap) {
+      const root = containerRef.current;
+      if (!root) return;
+      root.querySelectorAll(".text-track, .text-days").forEach(el => { el.style.visibility = "visible"; });
+      root.querySelectorAll(".main-card, .cta-wrapper").forEach(el => { el.style.display = "none"; });
+      return;
+    }
     const isMobile = window.innerWidth < 768;
     const ctx = gsap.context(() => {
       /* Initial states */
@@ -751,11 +775,13 @@ function CinematicHeroSection() {
         className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-full px-4 will-change-transform"
         style={{ transformStyle: "preserve-3d" }}
       >
-        <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
-        עיצוב ופיתוח
-        </h1>
-        <h1 className="text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
-          שמביא לקוחות
+        <h1 className="m-0">
+          <span className="text-track gsap-reveal text-3d-matte block text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
+            עיצוב ופיתוח
+          </span>
+          <span className="text-days gsap-reveal text-silver-matte block text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
+            שמביא לקוחות
+          </span>
         </h1>
       </div>
 
@@ -947,7 +973,7 @@ function WorkCard({ project, index, total, sticky }) {
   const targetScale = 1 - (total - 1 - index) * 0.04;
 
   React.useEffect(() => {
-    if (!sticky) { setScale(1); return; }
+    if (!sticky || REDUCED_MOTION) { setScale(1); return; }
     function onScroll() {
       const el = cardRef.current;
       if (!el) return;
@@ -964,6 +990,7 @@ function WorkCard({ project, index, total, sticky }) {
   }, [targetScale, sticky]);
 
   function onMouseMove(e) {
+    if (REDUCED_MOTION) return;
     const el = cardRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -1175,6 +1202,7 @@ function FaqItem({ item, index }) {
       <button
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
+        aria-controls={`faq-panel-${index}`}
         style={{
           width: "100%", display: "flex", alignItems: "center",
           justifyContent: "space-between", gap: 16,
@@ -1197,10 +1225,10 @@ function FaqItem({ item, index }) {
           +
         </span>
       </button>
-      <div style={{
+      <div id={`faq-panel-${index}`} role="region" style={{
         maxHeight: open ? "320px" : "0",
         overflow: "hidden",
-        transition: "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: REDUCED_MOTION ? "none" : "max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
       }}>
         <p style={{
           fontSize: 15, lineHeight: 1.8, color: "#4B5563",
@@ -1824,8 +1852,8 @@ function Contact() {
 
           <div ref={formRef} className={`contact-form reveal${formInView ? " in-view" : ""}`}>
             {submitted ? (
-              <div className="contact-success">
-                <div className="contact-success-icon">✓</div>
+              <div className="contact-success" role="status">
+                <div className="contact-success-icon" aria-hidden="true">✓</div>
                 <div className="contact-success-title">קיבלנו!</div>
                 <p className="contact-success-sub">נחזור אליכם תוך יום עסקים אחד.</p>
               </div>
@@ -1835,11 +1863,13 @@ function Contact() {
                   <div className="contact-field">
                     <label className="contact-label" htmlFor="cf-name">שם מלא *</label>
                     <input id="cf-name" className="contact-input" name="name" required
+                      autoComplete="name"
                       value={form.name} onChange={handleChange} placeholder="ישראל ישראלי" />
                   </div>
                   <div className="contact-field">
                     <label className="contact-label" htmlFor="cf-phone">טלפון / מייל *</label>
                     <input id="cf-phone" className="contact-input" name="phone" required
+                      autoComplete="tel"
                       value={form.phone} onChange={handleChange} placeholder="050-0000000" />
                   </div>
                 </div>
@@ -1859,12 +1889,13 @@ function Contact() {
                     value={form.message} onChange={handleChange}
                     placeholder="תארו בקצרה את העסק, מטרת האתר, ומה חשוב לכם..." />
                 </div>
-                <button type="submit" className="contact-submit" disabled={sending}>
+                <button type="submit" className="contact-submit" disabled={sending} aria-busy={sending}>
                   {sending ? "שולח..." : "שלחו פנייה →"}
                 </button>
                 <p className="contact-form-note">* שדות חובה · לא שולחים ספאם, לעולם לא.</p>
+                {/* role=alert announces the failure to screen readers; #C03736 keeps 4.5:1 on white */}
                 {submitError && (
-                  <p style={{ color: "#E24B4A", fontSize: 13, marginTop: 8 }}>
+                  <p role="alert" style={{ color: "#C03736", fontSize: 13, marginTop: 8 }}>
                     משהו השתבש. נסו שוב או כתבו לנו ישירות.
                   </p>
                 )}
@@ -1884,7 +1915,7 @@ function Cf2MagneticBtn({ href, children, variant, onClick }) {
 
   React.useEffect(() => {
     const gsap = window.gsap;
-    if (!gsap) return;
+    if (!gsap || REDUCED_MOTION) return;
     const el = ref.current;
     if (!el) return;
 
@@ -1928,7 +1959,7 @@ function CinematicFooter() {
   React.useEffect(() => {
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
-    if (!gsap || !ScrollTrigger) return;
+    if (!gsap || !ScrollTrigger || REDUCED_MOTION) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const wrapper = wrapperRef.current;
@@ -1965,7 +1996,7 @@ function CinematicFooter() {
   }, []);
 
   function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: REDUCED_MOTION ? "auto" : "smooth" });
   }
 
   return (
