@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>מדיניות פרטיות · Motion</title>
+  <meta name="description" content="מדיניות הפרטיות של Motion — איזה מידע נאסף, כיצד הוא נשמר, וזכויותיך. ללא עוגיות וללא מעקב.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#5B2BE0">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235B2BE0'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;800;900&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #5B2BE0;
+      --brand-deep: #3D169E;
+      --ink: #16121F;
+      --body: #4A4458;
+      --bg: #FBFAFE;
+      --line: #ECE7F6;
+      --tint: #F2EDFE;
+      --tint-ink: #3D169E;
+      --ok-bg: #ECFDF5;
+      --ok-ink: #065F46;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      direction: rtl;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.85;
+    }
+
+    .top-wash {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 340px;
+      background:
+        radial-gradient(120% 80% at 90% -10%, rgba(91,43,224,0.14), transparent 60%),
+        radial-gradient(90% 70% at 0% 0%, rgba(91,43,224,0.07), transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 5rem;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 3.25rem;
+    }
+
+    .logo {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .logo .sub {
+      display: block;
+      font-family: 'Heebo', sans-serif;
+      color: #9A93AC;
+      font-weight: 500;
+      font-size: 12.5px;
+      margin-top: 5px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--brand-deep);
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 9px 15px;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px -8px rgba(91,43,224,0.35);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      white-space: nowrap;
+    }
+    .back-link:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgba(91,43,224,0.5); border-color: #D9CEF7; }
+    .back-link:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .back-link svg { transform: scaleX(-1); }
+
+    .doc-head { margin-bottom: 2.75rem; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--brand);
+      background: var(--tint);
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(32px, 6vw, 44px);
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+    .meta { font-size: 13.5px; color: #9A93AC; font-weight: 500; }
+
+    .intro {
+      font-size: 16px;
+      color: var(--body);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem 1.5rem;
+      box-shadow: 0 18px 40px -28px rgba(91,43,224,0.35);
+    }
+
+    hr { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+
+    section { margin-bottom: 2.25rem; scroll-margin-top: 1.5rem; }
+
+    h2 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.85rem;
+      padding-right: 0.85rem;
+      border-right: 3px solid var(--brand);
+      line-height: 1.3;
+    }
+    h2 .n { color: var(--brand); font-weight: 800; margin-left: 6px; }
+
+    p { font-size: 15.5px; color: var(--body); line-height: 1.9; margin-bottom: 0.75rem; }
+
+    ul { padding-right: 1.4rem; margin-bottom: 0.75rem; }
+    ul li { font-size: 15.5px; color: var(--body); line-height: 1.85; list-style: none; position: relative; margin-bottom: 8px; padding-right: 4px; }
+    ul li::before {
+      content: "";
+      position: absolute;
+      right: -1.05rem;
+      top: 0.72em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    strong { font-weight: 700; color: var(--ink); }
+
+    .callout {
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      margin: 0.5rem 0 0.75rem;
+      border: 1px solid transparent;
+    }
+    .callout p { margin: 0; font-size: 14.5px; line-height: 1.8; }
+    .callout.brand { background: var(--tint); border-color: #E2D7FB; }
+    .callout.brand p { color: var(--tint-ink); }
+    .callout.brand strong { color: var(--brand-deep); }
+    .callout.ok { background: var(--ok-bg); border-color: #C9F2DF; }
+    .callout.ok p { color: var(--ok-ink); }
+    .callout.ok strong { color: var(--ok-ink); }
+
+    .footer-note {
+      font-size: 13px;
+      color: #ABA3BC;
+      text-align: center;
+      margin-top: 3.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-note a { color: var(--brand-deep); text-decoration: none; font-weight: 600; }
+    .footer-note a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .page { padding: 1.25rem 1.15rem 4rem; }
+      .topbar { margin-bottom: 2.5rem; }
+      .logo { font-size: 21px; }
+      .back-link { padding: 8px 13px; font-size: 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .back-link { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-wash" aria-hidden="true"></div>
+
+  <main class="page">
+
+    <div class="topbar">
+      <a class="logo" href="/">Motion<span class="sub">שירותי בניית אתרים</span></a>
+      <a class="back-link" href="/">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        חזרה לאתר
+      </a>
+    </div>
+
+    <header class="doc-head">
+      <span class="eyebrow">מסמך משפטי</span>
+      <h1>מדיניות פרטיות</h1>
+      <p class="meta">עודכן לאחרונה: יוני 2026</p>
+    </header>
+
+    <section>
+      <p class="intro">מדיניות זו מסבירה כיצד Motion (אליה) אוסף, משתמש ושומר מידע אישי של מבקרים ולקוחות. אני מתייחס ברצינות לפרטיותך ומתחייב להגן על המידע האישי שלך.</p>
+    </section>
+
+    <hr>
+
+    <section id="collect">
+      <h2><span class="n">1.</span>איזה מידע אני אוסף</h2>
+      <p>המידע היחיד שנאסף הוא זה שאתה מוסר ברצונך דרך טופס יצירת הקשר באתר:</p>
+      <ul>
+        <li>שם מלא</li>
+        <li>כתובת מייל</li>
+        <li>מספר טלפון</li>
+      </ul>
+      <div class="callout ok">
+        <p>אני <strong>לא</strong> משתמש בעוגיות (Cookies), אין מעקב, Google Analytics או כל תוכנת ניתוח נתונים. הביקור באתר נשאר אנונימי ואינו מותיר עליך שום מידע מזהה.</p>
+      </div>
+    </section>
+
+    <section id="usage">
+      <h2><span class="n">2.</span>כיצד אני משתמש במידע</h2>
+      <p>המידע שנמסר דרך הטופס משמש אך ורק למטרות הבאות:</p>
+      <ul>
+        <li>חזרה אליך ומענה לפנייתך</li>
+        <li>ניהול הקשר המקצועי איתך וניהול הפרויקט</li>
+      </ul>
+      <p>לא אשתמש במידע ליצירת שיווק, ניוזלטרים או כל חומר אחר ללא הסכמתך המפורשת.</p>
+    </section>
+
+    <section id="sharing">
+      <h2><span class="n">3.</span>שיתוף מידע עם צד שלישי</h2>
+      <p>אני <strong>לא מוכר, לא משתף ולא מעביר</strong> את פרטיך האישיים למטרות רווח.</p>
+      <p>המידע עשוי להישמר אצל שירותי תשתית מבוססים, כגון:</p>
+      <ul>
+        <li><strong>Vercel</strong> — פלטפורמת האחסון של האתר</li>
+        <li><strong>Supabase</strong> — בסיס נתונים (במידה ונעשה שימוש באחסון פנימי)</li>
+      </ul>
+      <p>שירותים אלה כפופים למדיניות הפרטיות שלהם ואינם רשאים להשתמש במידע למטרות אחרות.</p>
+    </section>
+
+    <section id="retention">
+      <h2><span class="n">4.</span>כמה זמן שומרים את המידע</h2>
+      <p>פרטי הפנייה נשמרים לאורך תקופת ההתקשרות המקצועית בלבד. לאחר סיום הפרויקט ניתן לבקש מחיקת המידע בכל עת.</p>
+    </section>
+
+    <section id="rights">
+      <h2><span class="n">5.</span>הזכויות שלך</h2>
+      <p>בהתאם לחוק הגנת הפרטיות הישראלי, יש לך זכות:</p>
+      <ul>
+        <li>לעיין במידע ששמור עליך</li>
+        <li>לבקש תיקון מידע שגוי</li>
+        <li>לבקש מחיקת המידע שלך</li>
+      </ul>
+      <div class="callout brand">
+        <p>כל בקשה הקשורה למידע אישי ניתן להפנות דרך WhatsApp או טופס יצירת הקשר באתר, ואטפל בפנייתך תוך 7 ימי עסקים.</p>
+      </div>
+    </section>
+
+    <section id="security">
+      <h2><span class="n">6.</span>אבטחת מידע</h2>
+      <p>האתר כולו מאובטח בתעודת SSL (HTTPS) שמצפינה את כל התקשורת בין הדפדפן לשרת. אני נוקט באמצעים סבירים להגנה על המידע שנמסר לי.</p>
+    </section>
+
+    <section id="changes">
+      <h2><span class="n">7.</span>שינויים במדיניות</h2>
+      <p>Motion שומרת לעצמה את הזכות לעדכן מדיניות זו בכל עת. שינויים מהותיים יפורסמו באתר וייכנסו לתוקף 14 יום לאחר פרסומם.</p>
+    </section>
+
+    <section id="contact">
+      <h2><span class="n">8.</span>יצירת קשר</h2>
+      <p>בכל שאלה בנוגע למדיניות הפרטיות ניתן לפנות אליי דרך <a href="https://wa.me/972535406691" style="color:var(--brand-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px;">WhatsApp</a> או דרך טופס יצירת הקשר באתר.</p>
+    </section>
+
+    <p class="footer-note">&#169; 2026 Motion · כל הזכויות שמורות · <a href="/">חזרה לעמוד הבית</a></p>
+
+  </main>
+</body>
+</html>

@@ -1,6 +1,7 @@
 node_modules/
 .superpowers/
 .agents/
+.claude/
 docs/
 about me/
 CLAUDE (2).md

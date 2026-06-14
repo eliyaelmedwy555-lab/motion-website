@@ -27,7 +27,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "containerWidth": 1280,
   "density": 1,
   "headline": "אתר שמביא לקוחות לא רק נראה טוב.",
-  "subhead": "בונים לכם אתר מקצועי תוך שבוע. מהיר, נקי, ומותאם לנייד. בלי עיכובים ובלי הפתעות.",
+  "subhead": "בונים לכם אתר מקצועי תוך כמה שבועות, תלוי בפרויקט. מהיר, נקי, ומותאם לנייד. בלי עיכובים ובלי הפתעות.",
   "hlMode": "accent",
   "showStats": true,
   "showHeroBadge": true,
@@ -258,7 +258,7 @@ function Nav() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <a href="#contact" className="btn btn-primary btn-sm" onClick={closeMenu}>דברו איתנו</a>
+        <a href="#contact" className="btn btn-primary btn-sm" onClick={closeMenu}>דברו איתי</a>
         <nav className={`nav-links${menuOpen ? " open" : ""}`}>
           <a href="#services" className={active === "services" ? "nav-active" : ""} onClick={closeMenu}>שירותים</a>
           <a href="#work" className={active === "work" ? "nav-active" : ""} onClick={closeMenu}>עבודות</a>
@@ -365,7 +365,7 @@ function Hero({ tweaks }) {
         {tweaks.showStats &&
           <ul ref={statsRef} className="stats stats-centered">
             <AnimatedStat num="100%" label="מותאם לנייד" inView={statsInView} />
-            <AnimatedStat num="5 ימים" label="ממוצע להשקה" inView={statsInView} />
+            <AnimatedStat num="שבועות" label="מהבריף להשקה" inView={statsInView} />
             <AnimatedStat num="24/7" label="תמיכה טכנית" inView={statsInView} />
           </ul>
         }
@@ -373,7 +373,7 @@ function Hero({ tweaks }) {
         {tweaks.showHeroBadge &&
           <div className="hero-badge hero-badge-centered">
             <span className="pulse" />
-            <span>זמין לפרויקטים חדשים</span>
+            <span>מקבל פניות עכשיו · בלי תשלום בשלב זה</span>
           </div>
         }
       </div>
@@ -391,7 +391,7 @@ function Hero({ tweaks }) {
         <span className="hero-float-dot" />
         <div>
           <div className="hero-float-label">לקוח חדש הצטרף</div>
-          <div className="hero-float-val">השקה תוך 5 ימים</div>
+          <div className="hero-float-val">השקה תוך כמה שבועות</div>
         </div>
       </div>
     </section>
@@ -402,6 +402,8 @@ function Hero({ tweaks }) {
 const SERVICES = [
   { n: "01", name: "אתר תדמית", desc: "עמוד הבית של העסק שלכם. בהיר, מקצועי, ומסביר במשפט אחד מה אתם עושים. 5 עמודים בליבה, מותאם לנייד מהיום הראשון.", tag: "₪2,500" },
   { n: "02", name: "דף נחיתה",  desc: "דף ממוקד אחד שמייצר לידים לקמפיין בלי הסחות, רק מסר ופעולה. כולל 3 עמודים, חיבור לפיקסל ו CRM.", tag: "₪1,500" },
+  { n: "03", name: "אתר פורטפוליו", desc: "תיק עבודות דיגיטלי ליוצרים, מעצבים ופרילנסרים. גלריית פרויקטים, אנימציות חלקות ועיצוב שמציג אתכם בצורה הכי טובה.", tag: "בהתאמה" },
+  { n: "04", name: "תמונת דף שיווקית", desc: "גרפיקה שיווקית בודדת לפוסט, מודעה או דף נחיתה. מעוצבת לפי המותג שלכם, מוכנה לפרסום.", tag: "₪150" },
 ];
 
 function Services({ tweaks }) {
@@ -417,10 +419,10 @@ function Services({ tweaks }) {
               <span className="eyebrow-dot" />
               שירותים
             </span>
-            <h2 className="section-title section-title-xl">מה אנחנו<br />בונים.</h2>
+            <h2 className="section-title section-title-xl">מה אני<br />בונה.</h2>
           </div>
           <p className="section-sub" style={{ maxWidth: 380 }}>
-            שתי קופסאות. בלי בלבול, בוחרים מה שמתאים ומתחילים.
+            בלי בלבול — מאתר שלם ועד גרפיקה בודדת. בוחרים מה שמתאים ומתחילים.
           </p>
         </div>
 
@@ -449,7 +451,7 @@ function Services({ tweaks }) {
 const STEPS = [
   { n: "01", name: "שיחה",  desc: "30 דקות בזום או טלפון. מבינים מה צריך, מה לא, ולמי זה מדבר.", icon: IconMessageSquare },
   { n: "02", name: "עיצוב", desc: "מקבלים מוקאפ ראשון תוך 48 שעות לא פאוורפוינט, אלא קישור חי.", icon: IconFileText },
-  { n: "03", name: "בנייה", desc: "בונים את האתר בצד שלנו. אתם רואים את ההתקדמות, מעירים, מאשרים.", icon: IconWrench },
+  { n: "03", name: "בנייה", desc: "אני בונה את האתר אצלי. אתם רואים את ההתקדמות, מעירים, מאשרים.", icon: IconWrench },
   { n: "04", name: "השקה",  desc: "מעלים לדומיין, מסירים לידיים שלכם.", icon: IconGlobe },
 ];
 
@@ -469,7 +471,7 @@ function Process() {
             </span>
             <h2 className="section-title section-title-xl">איך זה<br />עובד.</h2>
             <p className="section-sub" style={{ maxWidth: 380 }}>
-              ארבעה שלבים. ממוצע שבוע מהבריף ועד שהאתר באוויר, בלי הפתעות באמצע הדרך.
+              ארבעה שלבים. כמה שבועות מהבריף ועד שהאתר באוויר, תלוי בפרויקט, בלי הפתעות באמצע הדרך.
             </p>
             <a href="#contact" className="hero-new-cta-btn process-intro-cta">
               בואו נתחיל
@@ -636,14 +638,6 @@ const CINEMATIC_STYLES = `
     transform: translateY(1px); background: #18181B;
     box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 3px 8px rgba(0,0,0,0.9);
   }
-
-  .progress-ring {
-    transform: rotate(-90deg);
-    transform-origin: center;
-    stroke-dasharray: 402;
-    stroke-dashoffset: 402;
-    stroke-linecap: round;
-  }
 `;
 
 function CinematicHeroSection() {
@@ -673,35 +667,37 @@ function CinematicHeroSection() {
 
   /* Cinematic GSAP scroll timeline */
   React.useEffect(() => {
-    /* Reduced motion (or GSAP failed to load): no pin, no scroll-jacking —
-       show the headline statically and drop the card/CTA layers entirely. */
-    if (REDUCED_MOTION || !window.gsap) {
+    /* Reduced motion (or GSAP/ScrollTrigger failed to load): no pin, no
+       scroll-jacking — show the headline statically and drop the card layer.
+       Without the ScrollTrigger guard the timeline would just auto-play. */
+    if (REDUCED_MOTION || !window.gsap || !window.ScrollTrigger) {
       const root = containerRef.current;
       if (!root) return;
-      root.querySelectorAll(".text-track, .text-days").forEach(el => { el.style.visibility = "visible"; });
+      root.querySelectorAll(".text-track, .text-days, .cin-hero-sub, .cin-hero-trust").forEach(el => { el.style.visibility = "visible"; });
       root.querySelectorAll(".main-card, .cta-wrapper").forEach(el => { el.style.display = "none"; });
       return;
     }
-    const isMobile = window.innerWidth < 768;
     const ctx = gsap.context(() => {
       /* Initial states */
       gsap.set(".text-track",   { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 });
       gsap.set(".text-days",    { autoAlpha: 1, clipPath: "inset(0 100% 0 0)" });
       gsap.set(".main-card",    { y: window.innerHeight + 200, autoAlpha: 1 });
       gsap.set([".card-left-text", ".card-right-text", ".mockup-scroll-wrapper", ".floating-badge", ".phone-widget"], { autoAlpha: 0 });
-      gsap.set(".cta-wrapper",  { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
+      gsap.set([".cin-hero-sub", ".cin-hero-trust"], { autoAlpha: 0, y: 24 });
+      gsap.set(".cta-wrapper",  { autoAlpha: 0, scale: 0.85, y: 40, filter: "blur(20px)" });
 
       /* Entrance animation (fires on mount) */
       gsap.timeline({ delay: 0.3 })
         .to(".text-track", { duration: 1.8, autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", rotationX: 0, ease: "expo.out" })
-        .to(".text-days",  { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0");
+        .to(".text-days",  { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0")
+        .to([".cin-hero-sub", ".cin-hero-trust"], { duration: 0.9, autoAlpha: 1, y: 0, stagger: 0.14, ease: "power3.out" }, "-=0.9");
 
       /* Scroll-driven timeline */
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=7000",
+          end: "+=3000",
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -710,49 +706,43 @@ function CinematicHeroSection() {
 
       tl
         /* Card rises, hero text blurs away */
-        .to([".hero-text-wrapper", ".bg-grid-theme"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
-        .to(".main-card", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
+        .to([".hero-text-wrapper", ".bg-grid-theme", ".aurora-bg"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 1.5 }, 0)
+        /* Once fully covered by the card, drop the text layer from the a11y/tab order */
+        .set(".hero-text-wrapper", { autoAlpha: 0 }, 1.5)
+        .to(".main-card", { y: 0, ease: "power3.inOut", duration: 1.5 }, 0)
         /* Card expands fullscreen */
-        .to(".main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.5 })
+        .to(".main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.2 }, "-=0.5")
         /* Mockup flies in */
         .fromTo(".mockup-scroll-wrapper",
           { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
-          { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 }, "-=0.8")
+          { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.8 }, "-=0.7")
         .fromTo(".phone-widget",
           { y: 40, autoAlpha: 0, scale: 0.95 },
-          { y: 0, autoAlpha: 1, scale: 1, stagger: 0.15, ease: "back.out(1.2)", duration: 1.5 }, "-=1.5")
-        /* Progress ring + counter animate */
-        .to(".progress-ring", { strokeDashoffset: 60, duration: 2, ease: "power3.inOut" }, "-=1.2")
-        .to(".counter-val", { innerHTML: 100, snap: { innerHTML: 1 }, duration: 2, ease: "expo.out" }, "-=2.0")
+          { y: 0, autoAlpha: 1, scale: 1, stagger: 0.1, ease: "back.out(1.2)", duration: 1.1 }, "-=1.2")
+        /* Leads counter counts up as the feed cards appear */
+        .to(".counter-val", { innerHTML: 23, snap: { innerHTML: 1 }, duration: 1.4, ease: "expo.out" }, "-=1.4")
         /* Badges and text slide in */
         .fromTo(".floating-badge",
           { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 },
-          { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
+          { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.1, stagger: 0.15 }, "-=1.4")
         .fromTo(".card-left-text",
           { x: -50, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
+          { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.1 }, "-=1.1")
         .fromTo(".card-right-text",
           { x: 50, autoAlpha: 0, scale: 0.8 },
-          { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
-        /* Hold */
-        .to({}, { duration: 2.5 })
-        /* Swap to CTA */
-        .set(".hero-text-wrapper", { autoAlpha: 0 })
-        .set(".cta-wrapper", { autoAlpha: 1 })
-        .to({}, { duration: 1.5 })
+          { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.1 }, "<")
+        /* Hold on the full card */
+        .to({}, { duration: 0.6 })
         /* Card content exits */
         .to([".mockup-scroll-wrapper", ".floating-badge", ".card-left-text", ".card-right-text"],
-          { scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05 })
-        /* Card shrinks back */
-        .to(".main-card", {
-          width:  isMobile ? "92vw" : "85vw",
-          height: isMobile ? "92vh" : "85vh",
-          borderRadius: isMobile ? "32px" : "40px",
-          ease: "expo.inOut", duration: 1.8,
-        }, "pullback")
-        .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
-        /* Card flies off screen */
-        .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
+          { scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 0.9, stagger: 0.04 })
+        /* ── Closing beat: card lifts away, the CTA rises on the clean page ── */
+        .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.inOut", duration: 1.5 }, "reveal")
+        .fromTo(".cta-wrapper",
+          { autoAlpha: 0, scale: 0.85, y: 40, filter: "blur(20px)" },
+          { autoAlpha: 1, scale: 1, y: 0, filter: "blur(0px)", ease: "expo.out", duration: 1.4 }, "reveal+=0.55")
+        /* Hold on the closing CTA */
+        .to({}, { duration: 0.8 });
     }, containerRef);
 
     return () => ctx.revert();
@@ -768,6 +758,7 @@ function CinematicHeroSection() {
     >
       <style dangerouslySetInnerHTML={{ __html: CINEMATIC_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
+      <AuroraBackground />
       <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
 
       {/* ── Background text layer ── */}
@@ -783,15 +774,21 @@ function CinematicHeroSection() {
             שמביא לקוחות
           </span>
         </h1>
+        <p dir="rtl" className="cin-hero-sub gsap-reveal mt-6 max-w-xl mx-auto text-base md:text-lg font-light leading-relaxed" style={{ color: "#6B7280" }}>
+          אתרי תדמית ודפי נחיתה לעסקים — מעיצוב ועד השקה, תוך כמה שבועות (תלוי בפרויקט).
+        </p>
+        <p dir="rtl" className="cin-hero-trust gsap-reveal mt-7 text-xs md:text-sm font-medium tracking-wide" style={{ color: "#6B7280" }}>
+          עיצוב בהתאמה אישית&ensp;·&ensp;השקה תוך כמה שבועות&ensp;·&ensp;ליווי אישי
+        </p>
       </div>
 
-      {/* ── CTA layer (shown at end of scroll) ── */}
-      <div className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-full px-4 gsap-reveal pointer-events-auto will-change-transform">
+      {/* ── CTA layer (revealed at the end of the scroll sequence) ── */}
+      <div dir="rtl" className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-full px-4 gsap-reveal pointer-events-auto will-change-transform">
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-silver-matte">
           מוכנים להתחיל?
         </h2>
         <p className="text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed" style={{ color: "#6B7280" }}>
-          שיחת היכרות בחינם, ללא התחייבות. מהיום ועד השקה — שבוע בממוצע.
+          שיחת היכרות בחינם, ללא התחייבות. מהיום ועד השקה — כמה שבועות, תלוי בפרויקט.
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
           <a href="https://wa.me/972535406691" className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]">
@@ -799,7 +796,7 @@ function CinematicHeroSection() {
             <svg className="w-7 h-7 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
-            <span className="text-xl font-bold leading-none tracking-tight">WhatsApp</span>
+            <span className="text-xl font-bold leading-none tracking-tight">דברו איתי ב-WhatsApp</span>
           </a>
           <a href="#work" className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]">
             <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -848,56 +845,68 @@ function CinematicHeroSection() {
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" style={{ boxShadow: "0 0 8px rgba(34,197,94,0.8)" }} />
                     </div>
 
-                    {/* App UI */}
-                    <div className="relative w-full h-full pt-12 px-5 pb-8 flex flex-col">
-                      <div className="phone-widget flex justify-between items-center mb-8">
-                        <div className="flex flex-col">
-                          <span className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: "#a3a3a3" }}>Motion</span>
-                          <span className="text-xl font-bold tracking-tight text-white">Lighthouse</span>
-                        </div>
+                    {/* App UI — live leads feed */}
+                    <div dir="rtl" className="relative w-full h-full pt-12 px-4 pb-8 flex flex-col">
+                      <div className="phone-widget flex justify-between items-center mb-5">
                         <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style={{ background: "rgba(124,58,237,0.15)", color: "#c4b5fd", border: "1px solid rgba(124,58,237,0.3)" }}>M</div>
+                        <div className="flex flex-col items-end">
+                          <span className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: "#a3a3a3" }}>Motion</span>
+                          <span className="text-lg font-bold tracking-tight text-white">פניות נכנסות</span>
+                        </div>
                       </div>
 
-                      {/* Progress ring */}
-                      <div className="phone-widget relative w-44 h-44 mx-auto flex items-center justify-center mb-8" style={{ filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.8))" }}>
-                        <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
-                          <circle cx="88" cy="88" r="64" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="12" />
-                          <circle className="progress-ring" cx="88" cy="88" r="64" fill="none" stroke="#7C3AED" strokeWidth="12" />
-                        </svg>
-                        <div className="text-center z-10 flex flex-col items-center">
+                      {/* Leads counter highlight */}
+                      <div className="phone-widget rounded-2xl p-4 mb-4 text-center" style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.22),rgba(91,43,224,0.06))", border: "1px solid rgba(167,139,250,0.25)", filter: "drop-shadow(0 12px 22px rgba(0,0,0,0.55))" }}>
+                        <div className="flex items-baseline justify-center gap-1.5">
                           <span className="counter-val text-4xl font-extrabold tracking-tighter text-white">0</span>
-                          <span className="text-[8px] uppercase font-bold mt-0.5" style={{ color: "rgba(196,181,253,0.5)", letterSpacing: "0.1em" }}>Performance</span>
+                          <span className="text-base font-bold" style={{ color: "#c4b5fd" }}>פניות</span>
                         </div>
+                        <span className="text-[9px] uppercase font-bold mt-1 block" style={{ color: "rgba(196,181,253,0.6)", letterSpacing: "0.08em" }}>החודש מהאתר · ‎+38%</span>
                       </div>
 
-                      {/* Widgets */}
-                      <div className="space-y-3">
-                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.2),rgba(91,43,224,0.05))", border: "1px solid rgba(167,139,250,0.2)" }}>
-                            {/* Zap / speed */}
-                            <svg className="w-4 h-4" fill="none" stroke="rgb(167,139,250)" viewBox="0 0 24 24" aria-hidden="true">
-                              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                      {/* Feed */}
+                      <div className="space-y-2.5 flex-1">
+                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.25),rgba(91,43,224,0.05))", border: "1px solid rgba(167,139,250,0.25)" }}>
+                            {/* Mail / form */}
+                            <svg className="w-4 h-4" fill="none" stroke="rgb(196,181,253)" viewBox="0 0 24 24" aria-hidden="true">
+                              <rect x="3" y="5" width="18" height="14" rx="2" strokeWidth="2"/>
+                              <path d="m3 7 9 6 9-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-20 rounded-full mb-1.5" style={{ background: "rgba(255,255,255,0.15)" }} />
-                            <div className="h-1.5 w-10 rounded-full" style={{ background: "rgba(255,255,255,0.07)" }} />
+                          <div className="flex-1 text-right">
+                            <div className="text-xs font-bold text-white">פנייה חדשה מהאתר</div>
+                            <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.45)" }}>דנה · טופס יצירת קשר</div>
                           </div>
-                          <span className="text-[9px] font-bold" style={{ color: "#a78bfa" }}>0.8s</span>
+                          <span className="text-[9px] font-bold flex-shrink-0" style={{ color: "#a78bfa" }}>עכשיו</span>
                         </div>
-                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(16,185,129,0.2),rgba(5,150,105,0.05))", border: "1px solid rgba(52,211,153,0.2)" }}>
-                            {/* Mobile */}
+
+                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(16,185,129,0.2),rgba(5,150,105,0.05))", border: "1px solid rgba(52,211,153,0.2)" }}>
+                            {/* Chat / WhatsApp */}
                             <svg className="w-4 h-4" fill="none" stroke="rgb(52,211,153)" viewBox="0 0 24 24" aria-hidden="true">
-                              <rect x="5" y="2" width="14" height="20" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
-                              <line x1="12" y1="18" x2="12.01" y2="18" strokeLinecap="round" strokeWidth="2"/>
+                              <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-16 rounded-full mb-1.5" style={{ background: "rgba(255,255,255,0.15)" }} />
-                            <div className="h-1.5 w-24 rounded-full" style={{ background: "rgba(255,255,255,0.07)" }} />
+                          <div className="flex-1 text-right">
+                            <div className="text-xs font-bold text-white">הודעת WhatsApp</div>
+                            <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.45)" }}>יוסי · "מתי אפשר להתחיל?"</div>
                           </div>
-                          <span className="text-[9px] font-bold" style={{ color: "#34d399" }}>100%</span>
+                          <span className="text-[9px] font-bold flex-shrink-0" style={{ color: "#34d399" }}>3 דק'</span>
+                        </div>
+
+                        <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.25),rgba(91,43,224,0.05))", border: "1px solid rgba(167,139,250,0.25)" }}>
+                            {/* Check / deal closed */}
+                            <svg className="w-4 h-4" fill="none" stroke="rgb(196,181,253)" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M20 6 9 17l-5-5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                          <div className="flex-1 text-right">
+                            <div className="text-xs font-bold text-white">לקוח חדש נסגר 🎉</div>
+                            <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.45)" }}>פרויקט אתר תדמית</div>
+                          </div>
+                          <span className="text-[9px] font-bold flex-shrink-0" style={{ color: "#a78bfa" }}>1 ש'</span>
                         </div>
                       </div>
 
@@ -914,7 +923,7 @@ function CinematicHeroSection() {
                   </div>
                   <div>
                     <p className="text-white text-xs lg:text-sm font-bold tracking-tight">אתר הושק!</p>
-                    <p className="text-[10px] lg:text-xs font-medium" style={{ color: "rgba(196,181,253,0.6)" }}>תוך 5 ימים בלבד</p>
+                    <p className="text-[10px] lg:text-xs font-medium" style={{ color: "rgba(196,181,253,0.6)" }}>תוך כמה שבועות</p>
                   </div>
                 </div>
 
@@ -932,12 +941,12 @@ function CinematicHeroSection() {
             </div>
 
             {/* Copy — bottom on mobile, left on desktop */}
-            <div className="card-left-text gsap-reveal order-3 lg:order-1 flex flex-col justify-center text-center lg:text-left z-20 w-full px-4 lg:px-0">
+            <div dir="rtl" className="card-left-text gsap-reveal order-3 lg:order-1 flex flex-col justify-center text-center lg:text-right z-20 w-full px-4 lg:px-0">
               <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-5 tracking-tight">
                 בניית אתרים, מוגדרת מחדש.
               </h3>
               <p className="hidden md:block text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-sm lg:max-w-none" style={{ color: "rgba(219,209,254,0.7)" }}>
-                <span className="text-white font-semibold">Motion</span> בונה אתרי תדמית ודפי נחיתה לעסקים. עיצוב מרהיב, קוד מהיר, והשקה בממוצע תוך שבוע — בלי עיכובים ובלי הפתעות.
+                <span className="text-white font-semibold">Motion</span> בונה אתרי תדמית ודפי נחיתה לעסקים. עיצוב מרהיב, קוד מהיר, והשקה תוך כמה שבועות, תלוי בפרויקט — בלי עיכובים ובלי הפתעות.
               </p>
             </div>
 
@@ -1102,10 +1111,10 @@ function Work({ tweaks }) {
               <span className="eyebrow-dot" />
               עבודות
             </span>
-            <h2 className={`section-title section-title-xl ${isDark ? "section-title-light" : ""}`}>תיק עבודות</h2>
+            <h2 className={`section-title section-title-xl ${isDark ? "section-title-light" : ""}`}>פרויקטים שבניתי</h2>
           </div>
           <p className={`section-sub ${isDark ? "section-sub-light" : ""}`} style={{ maxWidth: 380 }}>
-            כל פרויקט, תוצאה אמיתית. לא תבנית, לא קיצורי דרך.
+            אני בתחילת הדרך — אלה דוגמאות שבניתי בעצמי כדי להראות את הרמה. לא תבנית, לא קיצורי דרך.
           </p>
         </div>
 
@@ -1140,7 +1149,7 @@ function Testimonials() {
               <span className="eyebrow-dot" />
               לקוחות
             </span>
-            <h2 className="section-title section-title-xl">מה אומרים<br />עלינו.</h2>
+            <h2 className="section-title section-title-xl">מה אומרים<br />עליי.</h2>
           </div>
           <p className="section-sub" style={{ maxWidth: 380 }}>
             לא הבטחות, אנשים שעברו את התהליך ומספרים.
@@ -1170,7 +1179,7 @@ function Testimonials() {
 const FAQS = [
   {
     q: "כמה זמן זה באמת לוקח?",
-    a: "ממוצע 5 עד 7 ימי עבודה מהבריף ועד שהאתר באוויר. אם הפרויקט מורכב יותר, אומרים מראש ומסכימים על לוח זמנים. אין הפתעות באמצע.",
+    a: "כמה שבועות, תלוי בסוג ובהיקף הפרויקט. בפרויקט מורכב יותר אומרים מראש ומסכימים על לוח זמנים. אין הפתעות באמצע.",
   },
   {
     q: "מה קורה אם אני לא מרוצה מהתוצאה?",
@@ -1178,7 +1187,7 @@ const FAQS = [
   },
   {
     q: "למה לא פשוט לבנות אתר לבדי?",
-    a: "אפשר. אבל אנחנו בונים אתרי פרמיום עם אנימציות תנועה מתקדמות, חוויית משתמש מחושבת, ועיצוב שמרגיש יוקרתי ולא גנרי. זה לא רק אתר שנראה טוב בתמונה, זה אתר שאנשים זוכרים. רמה כזו לוקחת שנות ניסיון, וזמן שלרוב בעלי עסקים פשוט אין.",
+    a: "אפשר. אבל אני בונה אתרי פרמיום עם אנימציות תנועה מתקדמות, חוויית משתמש מחושבת, ועיצוב שמרגיש יוקרתי ולא גנרי. זה לא רק אתר שנראה טוב בתמונה, זה אתר שאנשים זוכרים. רמה כזו לוקחת שנות ניסיון, וזמן שלרוב בעלי עסקים פשוט אין.",
   },
   {
     q: "מה כולל התחזוקה החודשית?",
@@ -1390,8 +1399,8 @@ const WHYMOTION = [
   },
   {
     icon: <IconTarget />,
-    title: "5 ימים בממוצע",
-    body: "מתחילים, בונים, משיקים. בלי שבועות של המתנה.",
+    title: "זמן הקמה הוגן",
+    body: "מתחילים, בונים, משיקים בקצב נכון — כמה שבועות, תלוי בפרויקט.",
   },
   {
     icon: <IconGlobe />,
@@ -1456,6 +1465,7 @@ function WhyMotion() {
             אני אליה, מפתח אתרים עצמאי מישראל, ואני לא בונה אתרים רגילים.
             אני בונה אתרים עם אנימציות תנועה חיות, חוויית משתמש מחושבת ועיצוב שמרגיש יוקרתי,
             בלי המחיר היוקרתי. הרמה של סטודיו גדול, במחיר שעסק קטן יכול להרשות לעצמו.
+            אני רק בתחילת הדרך, ולכן המחירים נוחים — אני בונה תיק עבודות, ואתם נהנים מתשומת לב מלאה.
             וכשאתם עובדים איתי, אתם מדברים ישירות איתי, בלי מתווכים.
           </p>
         </div>
@@ -1594,11 +1604,11 @@ function PricingCard({ plan, withMaintenance }) {
 }
 
 const PHASES = [
-  { n: "01", name: "אפיון",        h: 56 },
-  { n: "02", name: "עיצוב",        h: 84 },
-  { n: "03", name: "פיתוח",        h: 112 },
-  { n: "04", name: "בדיקות",       h: 140 },
-  { n: "05", name: "עלייה לאוויר", h: 168 },
+  { n: "01", name: "אפיון" },
+  { n: "02", name: "עיצוב" },
+  { n: "03", name: "פיתוח" },
+  { n: "04", name: "בדיקות" },
+  { n: "05", name: "עלייה לאוויר" },
 ];
 
 function PricingProcess() {
@@ -1606,17 +1616,17 @@ function PricingProcess() {
   return (
     <div ref={ref} className={`pricing-process-strip${inView ? ' in-view' : ''}`}>
       <div className="pricing-process-label">תהליך העבודה</div>
-      {/* Ascending pillars — grow from the baseline on scroll, RTL so they rise right→left. */}
-      <div className="pricing-process-chart" role="list">
+      {/* Horizontal RTL stepper — the track draws right→left, dots light up in stagger. */}
+      <div className="pricing-process-steps" role="list">
         {PHASES.map((phase, i) => (
-          <div key={phase.n} className="pricing-process-pillar" role="listitem">
-            <div
-              className="pricing-process-bar"
-              style={{ '--bar-h': `${phase.h}px`, '--bar-delay': `${i * 0.12}s` }}
-            >
-              <span className="pricing-process-bar-num">{phase.n}</span>
-            </div>
-            <span className="pricing-process-pillar-name">{phase.name}</span>
+          <div
+            key={phase.n}
+            className="pricing-process-step"
+            role="listitem"
+            style={{ '--step-delay': `${0.15 + i * 0.14}s` }}
+          >
+            <span className="pricing-process-dot">{phase.n}</span>
+            <span className="pricing-process-step-name">{phase.name}</span>
           </div>
         ))}
       </div>
@@ -1721,25 +1731,29 @@ function Pricing() {
 
         {/* [Launch notice] */}
         <div style={{
-          background: "rgba(91,43,224,0.07)",
-          border: "1.5px solid rgba(91,43,224,0.18)",
-          borderRadius: 14,
-          padding: "14px 24px",
+          background: "linear-gradient(135deg, rgba(91,43,224,0.12), rgba(91,43,224,0.05))",
+          border: "1.5px solid rgba(91,43,224,0.28)",
+          borderRadius: 18,
+          padding: "20px 28px",
           textAlign: "center",
           marginBottom: 32,
           direction: "rtl",
-          fontSize: 15,
           color: "#5B2BE0",
-          fontWeight: 500,
+          boxShadow: "0 14px 32px -16px rgba(91,43,224,0.4)",
         }}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: "inline-block", verticalAlign: "-2px", marginInlineEnd: 6 }}>
-            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
-          </svg>
-          <strong>כרגע לא מקבלים תשלומים</strong>. האתר בשלבי הקמה רשמית.{" "}
-          <a href="#contact" style={{ color: "#5B2BE0", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
-            שלחו פנייה
-          </a>{" "}
-          ונחזור אליכם ברגע שנפתח רשמית.
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 19, fontWeight: 800, marginBottom: 6 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+            </svg>
+            בשלב זה אני מקבל פניות בלבד — עדיין לא נגבה תשלום.
+          </div>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 500, color: "#6d4ad0" }}>
+            המחירים למטה להמחשה.{" "}
+            <a href="#contact" style={{ color: "#5B2BE0", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}>
+              שלחו פנייה
+            </a>{" "}
+            ואחזור אליכם ברגע שאפתח רשמית.
+          </p>
         </div>
 
         {/* [B] Package cards */}
@@ -1757,7 +1771,7 @@ function Pricing() {
 
         {/* [F] Disclaimer */}
         <p className="pricing-disclaimer">
-          * המחיר הסופי עשוי להשתנות בהתאם לדרישות הפרויקט, היקף העבודה וזמן הפיתוח.
+          * המחיר הסופי עשוי להשתנות בהתאם לדרישות הפרויקט, היקף העבודה וזמן הפיתוח. בשלב זה לא מתבצע חיוב — רק פנייה ושיחת היכרות.
         </p>
       </div>
     </section>
@@ -1787,7 +1801,7 @@ const CONTACT_PROMISES = [
   { icon: <IconZap />, text: "חזרה תוך 24 שעות בימי עסקים" },
   { icon: <IconTarget />, text: "שיחת ייעוץ ראשונה, בחינם לחלוטין" },
   { icon: <IconFileText />, text: "הצעת מחיר מפורטת ללא התחייבות" },
-  { icon: <IconShield />, text: "פרטיות מלאה, המידע שלכם אצלנו בלבד" },
+  { icon: <IconShield />, text: "פרטיות מלאה, המידע שלכם אצלי בלבד" },
 ];
 
 function Contact() {
@@ -1826,6 +1840,7 @@ function Contact() {
 
   return (
     <section id="contact" className="section section-contact" data-screen-label="08 Contact">
+      <AuroraBackground />
       <div className="container">
         <div ref={headRef} className={`section-head reveal${headInView ? " in-view" : ""}`}
           style={{ textAlign: "center", marginBottom: 56 }}>
@@ -1835,7 +1850,7 @@ function Contact() {
           </span>
           <h2 className="section-title section-title-xl" style={{ textAlign: "center" }}>בואו נדבר.</h2>
           <p className="section-sub" style={{ textAlign: "center", maxWidth: 460, margin: "12px auto 0" }}>
-            ספרו לנו על הפרויקט, נחזור עם הצעה ברורה תוך יום עסקים.
+            ספרו לי על הפרויקט, אחזור עם הצעה ברורה תוך יום עסקים.
           </p>
         </div>
 
@@ -1856,7 +1871,7 @@ function Contact() {
               <div className="contact-success" role="status">
                 <div className="contact-success-icon" aria-hidden="true">✓</div>
                 <div className="contact-success-title">קיבלנו!</div>
-                <p className="contact-success-sub">נחזור אליכם תוך יום עסקים אחד.</p>
+                <p className="contact-success-sub">אחזור אליכם תוך יום עסקים אחד.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
@@ -1885,7 +1900,7 @@ function Contact() {
                   </select>
                 </div>
                 <div className="contact-field">
-                  <label className="contact-label" htmlFor="cf-message">ספרו לנו עוד</label>
+                  <label className="contact-label" htmlFor="cf-message">ספרו לי עוד</label>
                   <textarea id="cf-message" className="contact-textarea" name="message"
                     value={form.message} onChange={handleChange}
                     placeholder="תארו בקצרה את העסק, מטרת האתר, ומה חשוב לכם..." />
@@ -1897,7 +1912,7 @@ function Contact() {
                 {/* role=alert announces the failure to screen readers; #C03736 keeps 4.5:1 on white */}
                 {submitError && (
                   <p role="alert" style={{ color: "#C03736", fontSize: 13, marginTop: 8 }}>
-                    משהו השתבש. נסו שוב או כתבו לנו ישירות.
+                    משהו השתבש. נסו שוב או כתבו לי ישירות.
                   </p>
                 )}
               </form>
@@ -1911,7 +1926,7 @@ function Contact() {
 
 /* ───────────────────────── New Cinematic Footer ───────────────────────── */
 
-function Cf2MagneticBtn({ href, children, variant, onClick }) {
+function Cf2MagneticBtn({ href, children, variant, onClick, target }) {
   const ref = React.useRef(null);
 
   React.useEffect(() => {
@@ -1942,7 +1957,7 @@ function Cf2MagneticBtn({ href, children, variant, onClick }) {
   if (onClick) {
     return <button ref={ref} onClick={onClick} className={cls}>{children}</button>;
   }
-  return <a ref={ref} href={href} className={cls}>{children}</a>;
+  return <a ref={ref} href={href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} className={cls}>{children}</a>;
 }
 
 const CF2_TICKER = [
@@ -2024,15 +2039,15 @@ function CinematicFooter() {
               <WhatsAppIcon />
               <span>WhatsApp</span>
             </Cf2MagneticBtn>
-            <Cf2MagneticBtn href="mailto:eliyaelmedwy555@gmail.com">
+            <Cf2MagneticBtn href="https://mail.google.com/mail/?view=cm&fs=1&to=motionbuilding1@gmail.com" target="_blank">
               <MailIcon />
               <span>שלחו מייל</span>
             </Cf2MagneticBtn>
           </div>
           <div className="cf2-sub-links">
-            <a href="#" className="cf2-pill-sm">תקנון</a>
-            <a href="#" className="cf2-pill-sm">פרטיות</a>
-            <a href="#" className="cf2-pill-sm">תמיכה</a>
+            <a href="/terms.html" className="cf2-pill-sm">תקנון</a>
+            <a href="/privacy.html" className="cf2-pill-sm">פרטיות</a>
+            <a href="/support.html" className="cf2-pill-sm">תמיכה</a>
           </div>
         </div>
 
@@ -2079,6 +2094,105 @@ function LaunchBanner() {
   );
 }
 
+/* ───────────────────────── Aurora background ─────────────────────────
+   Reusable animated aurora backdrop. Adapted from the shadcn/framer-motion
+   component to this stack: plain JSX (no TS/cn), no framer-motion, and it
+   reuses the existing `.aurora-bg`/`.aurora-layer` CSS + `@keyframes aurora`
+   in styles.css (brand purple palette). Motion is paused under
+   prefers-reduced-motion via CSS. Drop it in as the first child of any
+   `position: relative` section to get a premium moving glow behind content. */
+function AuroraBackground({ children, showRadialGradient = true, className = "" }) {
+  return (
+    <div className={`aurora-bg${showRadialGradient ? "" : " aurora-no-mask"}${className ? " " + className : ""}`}>
+      <div className="aurora-layer" aria-hidden="true" />
+      {children}
+    </div>
+  );
+}
+
+/* ───────────────────────── Section motion layer ─────────────────────────
+   Scroll-linked motion the IntersectionObserver reveal system can't do:
+   clip-path line-reveals on titles, eyebrow pops, and "curtain" entrances
+   for the dark surfaces. Skips entirely on reduced-motion / missing GSAP. */
+function SectionMotion() {
+  React.useEffect(() => {
+    if (REDUCED_MOTION || !window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(window.ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      /* Section titles: line-reveal out of a clip mask (clipPath only, so the
+         transform channel stays free for the parallax drift below). */
+      document.querySelectorAll(".section .section-title").forEach((title) => {
+        gsap.fromTo(title,
+          { clipPath: "inset(0 0 100% 0)" },
+          {
+            clipPath: "inset(0 0 -15% 0)",
+            duration: 1.1, ease: "power4.out",
+            scrollTrigger: { trigger: title, start: "top 88%", once: true },
+          });
+        /* Continuous parallax float as the title travels through the viewport. */
+        gsap.fromTo(title,
+          { yPercent: 7 },
+          {
+            yPercent: -7, ease: "none",
+            scrollTrigger: { trigger: title, start: "top bottom", end: "bottom top", scrub: 1 },
+          });
+      });
+
+      /* Eyebrow badges pop in just before their title */
+      document.querySelectorAll(".section .eyebrow").forEach((eb) => {
+        gsap.fromTo(eb,
+          { autoAlpha: 0, y: 14, scale: 0.92 },
+          {
+            autoAlpha: 1, y: 0, scale: 1,
+            duration: 0.65, ease: "back.out(1.6)",
+            scrollTrigger: { trigger: eb, start: "top 92%", once: true },
+          });
+      });
+
+      /* Section subtitles drift up gently behind their title (transform only —
+         opacity is owned by the IntersectionObserver reveal system). */
+      document.querySelectorAll(".section .section-sub").forEach((sub) => {
+        gsap.fromTo(sub,
+          { yPercent: 18 },
+          {
+            yPercent: -10, ease: "none",
+            scrollTrigger: { trigger: sub, start: "top bottom", end: "center center", scrub: 1 },
+          });
+      });
+
+      /* Signature cinematic move: the browser mockups drift inside their
+         clipped frames for a sense of depth as each work card scrolls past. */
+      document.querySelectorAll(".work-card-thumb .work-card-browser").forEach((mock) => {
+        gsap.fromTo(mock,
+          { yPercent: -6, scale: 1.06 },
+          {
+            yPercent: 6, ease: "none",
+            scrollTrigger: { trigger: mock.closest(".work-card") || mock, start: "top bottom", end: "bottom top", scrub: 1.1 },
+          });
+      });
+
+      /* Dark surfaces enter like a curtain: slightly scaled down, settle to full bleed.
+         Scale only — their top radius is owned by the CSS overlap design.
+         (.cf2-footer is position:fixed — ScrollTrigger geometry is wrong for fixed
+         elements and it already has its own entrance, so it's excluded.) */
+      document.querySelectorAll(".section-work-dark").forEach((panel) => {
+        gsap.fromTo(panel,
+          { scale: 0.955, autoAlpha: 0.85 },
+          {
+            scale: 1, autoAlpha: 1, ease: "none",
+            scrollTrigger: { trigger: panel, start: "top 96%", end: "top 32%", scrub: 0.6 },
+          });
+      });
+
+      ScrollTrigger.refresh();
+    });
+
+    return () => ctx.revert();
+  }, []);
+  return null;
+}
+
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
@@ -2112,6 +2226,7 @@ function App() {
     <>
       <a href="#main" className="skip-link">דלג לתוכן</a>
       <ScrollProgress />
+      <SectionMotion />
       <Nav />
       <main id="main" tabIndex={-1}>
         <CinematicHeroSection />

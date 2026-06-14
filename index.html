@@ -34,11 +34,12 @@
 <link rel="stylesheet" href="styles.css">
 <noscript><style>
   .reveal, .reveal-left, .reveal-scale, .num-row, .step, .pricing-dark-card {
-    opacity: 1 !important; transform: none !important;
+    opacity: 1 !important; transform: none !important; filter: none !important;
   }
 </style></noscript>
 </head>
 <body>
+<div class="page-curtain" aria-hidden="true"></div>
 <div id="root"></div>
 
 <!-- GSAP (CDN globals: window.gsap / window.ScrollTrigger) -->
@@ -64,6 +65,6 @@
 
 <!-- Main app — pre-bundled at build time (npm run build → assets/app.bundle.js).
      ?v= is a content hash stamped automatically by stamp-version.mjs; never edit it by hand. -->
-<script type="module" src="/assets/app.bundle.js?v=9feb64a0"></script>
+<script type="module" src="/assets/app.bundle.js?v=29b80ba6"></script>
 </body>
 </html>
