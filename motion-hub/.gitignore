@@ -1,0 +1,6 @@
+# Real environment values with secrets — never commit.
+.env
+
+# Local compose overrides (if you add any)
+docker-compose.override.yaml
+docker-compose.override.yml

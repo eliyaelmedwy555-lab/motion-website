@@ -6,6 +6,10 @@
 > טיפ: עברו על השלבים לפי הסדר. שלבים 1 ו-4 מהירים. שלב 3 (אפליקציות Meta ו-TikTok)
 > הוא האיטי ביותר — סבלנות, זה פעם אחת בלבד.
 
+> ⚠️ **אבטחה — חשוב:** את כל המפתחות הסודיים ממלאים בקובץ **`.env`** (ולא בתוך
+> `docker-compose.yaml`). הקובץ `.env` נמצא ב-`.gitignore` ולא נשמר בגיט, כדי שלא
+> תעלו מפתחות בטעות. אם שיתפתם מפתח בטעות — צרו אותו מחדש (Reset) באתר המפתחים.
+
 ---
 
 ## לפני שמתחילים — דרישות (הכל חינם)
@@ -40,18 +44,23 @@
    ```powershell
    cd "c:\website 2\motion-hub"
    ```
-2. הרימו את המערכת:
+2. צרו את קובץ ההגדרות `.env` מתוך הדוגמה (פעם אחת):
+   ```powershell
+   copy .env.example .env
+   ```
+   (בשלב הזה לא צריך לשנות בו כלום — ערכי ה-localhost שכבר בפנים מספיקים.)
+3. הרימו את המערכת:
    ```powershell
    docker compose up -d
    ```
    בפעם הראשונה זה מוריד את כל הרכיבים (כמה דקות). זה תקין.
-3. בדקו שהכל עלה:
+4. בדקו שהכל עלה:
    ```powershell
    docker compose ps
    ```
    כל השורות צריכות להיות `running` / `healthy`.
-4. פתחו בדפדפן: **http://localhost:4007**
-5. צרו משתמש (Register) — זה חשבון המנהל שלכם. התחברו.
+5. פתחו בדפדפן: **http://localhost:4007**
+6. צרו משתמש (Register) — זה חשבון המנהל שלכם. התחברו.
 
 ✅ **הצלחה בשלב 1 של התכנון:** אתם רואים דשבורד ריק של Postiz.
 
@@ -87,14 +96,14 @@
    (החליפו ל-דומיין שלכם.) עכשיו הכתובת `https://motion-eliya.ngrok-free.app`
    מצביעה על ה-Postiz המקומי שלכם.
 
-### 3ב. עדכון הכתובות בקובץ
+### 3ב. עדכון הכתובות בקובץ `.env`
 
-פתחו את `docker-compose.yaml`, ושנו את **שלוש** השורות האלה לכתובת ngrok שלכם:
+פתחו את הקובץ **`.env`** ושנו את **שלוש** השורות האלה לכתובת ngrok שלכם:
 
-```yaml
-MAIN_URL: 'https://motion-eliya.ngrok-free.app'
-FRONTEND_URL: 'https://motion-eliya.ngrok-free.app'
-NEXT_PUBLIC_BACKEND_URL: 'https://motion-eliya.ngrok-free.app/api'
+```env
+MAIN_URL=https://motion-eliya.ngrok-free.app
+FRONTEND_URL=https://motion-eliya.ngrok-free.app
+NEXT_PUBLIC_BACKEND_URL=https://motion-eliya.ngrok-free.app/api
 ```
 
 שמרו, ואז הפעילו מחדש:
@@ -115,10 +124,10 @@ docker compose up -d
    ```
 4. הוסיפו גם את המוצר **Instagram** (Instagram Graph API).
 5. במסך **App settings → Basic** העתיקו את **App ID** ואת **App Secret**.
-6. הדביקו אותם בקובץ `docker-compose.yaml`:
-   ```yaml
-   FACEBOOK_APP_ID: 'ה-App-ID-שלכם'
-   FACEBOOK_APP_SECRET: 'ה-App-Secret-שלכם'
+6. הדביקו אותם בקובץ `.env`:
+   ```env
+   FACEBOOK_APP_ID=ה-App-ID-שלכם
+   FACEBOOK_APP_SECRET=ה-App-Secret-שלכם
    ```
 
 > הערה: כל עוד האפליקציה ב-Meta במצב **Development**, אפשר להתחבר ולפרסם
@@ -134,10 +143,10 @@ docker compose up -d
    ```
    https://motion-eliya.ngrok-free.app/integrations/social/tiktok
    ```
-5. העתיקו את **Client Key** ו-**Client Secret** והדביקו בקובץ:
-   ```yaml
-   TIKTOK_CLIENT_ID: 'ה-Client-Key-שלכם'
-   TIKTOK_CLIENT_SECRET: 'ה-Client-Secret-שלכם'
+5. העתיקו את **Client Key** ו-**Client Secret** והדביקו בקובץ `.env`:
+   ```env
+   TIKTOK_CLIENT_ID=ה-Client-Key-שלכם
+   TIKTOK_CLIENT_SECRET=ה-Client-Secret-שלכם
    ```
 
 שמרו את הקובץ והפעילו מחדש:
@@ -181,5 +190,5 @@ docker compose up -d
   ושנכנסתם ל-Postiz דרך כתובת ה-ngrok ולא localhost.
 - **אינסטגרם לא מתחבר** → החשבון חייב להיות Business/Creator ומקושר לעמוד פייסבוק.
 - **הכל איטי / נתקע** → הגדילו זיכרון ל-Docker (Settings → Resources → Memory).
-- **שינוי כתובת ngrok** → אם הדומיין השתנה, עדכנו שוב את 3 כתובות ה-URL בקובץ,
+- **שינוי כתובת ngrok** → אם הדומיין השתנה, עדכנו שוב את 3 כתובות ה-URL בקובץ `.env`,
   את ה-Redirect URIs באפליקציות, והפעילו `docker compose up -d`.
