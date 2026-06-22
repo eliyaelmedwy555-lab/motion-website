@@ -44,6 +44,9 @@ services:
     volumes:
       - postiz-config:/config/
       - postiz-uploads:/uploads/
+      # Patch: host-only auth cookie so login works behind tunnel domains
+      # (trycloudflare.com / ngrok-free.dev are Public Suffix List domains).
+      - ./patches/subdomain.management.js:/app/apps/backend/dist/libraries/helpers/src/subdomain/subdomain.management.js:ro
     ports:
       - "4007:5000"
     networks:
