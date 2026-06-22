@@ -1,0 +1,20 @@
+# Never deploy these to the public website.
+# motion-hub holds .env with API secrets — must NOT be public.
+motion-hub
+docs
+node_modules
+.git
+
+# Private internal working folders — must NOT be public.
+strategy
+review
+content
+marketing
+
+# Local-only build/helper scripts (not part of the served site)
+cap-tmp.mjs
+export-logo.mjs
+export-logo-white.mjs
+render-avatar.mjs
+serve.mjs
+screenshot.mjs
