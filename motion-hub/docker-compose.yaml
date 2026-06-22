@@ -54,6 +54,8 @@ services:
         condition: service_healthy
       postiz-redis:
         condition: service_healthy
+      temporal:
+        condition: service_healthy
 
   postiz-postgres:
     image: postgres:17-alpine
@@ -146,6 +148,14 @@ services:
       - ./dynamicconfig:/etc/temporal/config/dynamicconfig
     labels:
       kompose.volume.type: configMap
+    healthcheck:
+      # Postiz waits for this before starting, so its backend never races a
+      # not-yet-ready Temporal (which caused a crashed backend + black screen).
+      test: ["CMD", "temporal", "operator", "cluster", "health", "--address", "temporal:7233"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
 
   temporal-ui:
     container_name: temporal-ui
